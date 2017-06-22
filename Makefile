@@ -5,8 +5,13 @@ test: install
 coverage: install
 	mkdir -p coverage
 	phpdbg --version
-	phpdbg -qrr vendor/bin/kahlan --coverage --istanbul=coverage/coverage.json --lcov=coverage/coverage.lcov --clover=coverage/coverage.xml
+	phpdbg -qrr vendor/bin/kahlan --coverage --istanbul=coverage/coverage.json
 	istanbul report
+
+ci: install
+	mkdir -p coverage
+	phpdbg --version
+	phpdbg -qrr vendor/bin/kahlan --coverage --istanbul=coverage/coverage.json --lcov=coverage/coverage.lcov --clover=coverage/coverage.xml
 
 open-coverage:
 	open coverage/lcov-report/index.html
