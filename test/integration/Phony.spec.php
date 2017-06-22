@@ -1,10 +1,10 @@
 <?php
 
-use Eloquent\Phony\Kahlan\Phony;
+use function Eloquent\Phony\Kahlan\mock;
 
 describe('Phony', function () {
     beforeEach(function () {
-        $this->handle = Phony::mock('Eloquent\Phony\Kahlan\Test\TestClassA');
+        $this->handle = mock('Eloquent\Phony\Kahlan\Test\TestClassA');
         $this->mock = $this->handle->get();
     });
 
