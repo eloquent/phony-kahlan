@@ -1,13 +1,15 @@
 test: install
 	php --version
-	vendor/bin/phpunit --no-coverage
+	vendor/bin/kahlan
 
 coverage: install
+	mkdir -p coverage
 	phpdbg --version
-	phpdbg -qrr vendor/bin/phpunit
+	phpdbg -qrr vendor/bin/kahlan --coverage --istanbul=coverage/coverage.json --lcov=coverage/coverage.lcov --clover=coverage/coverage.xml
+	istanbul report
 
 open-coverage:
-	open coverage/index.html
+	open coverage/lcov-report/index.html
 
 integration: install
 	test/integration/run

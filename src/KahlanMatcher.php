@@ -1,24 +1,29 @@
 <?php
 
-/*
- * This file is part of the Phony package.
- *
- * Copyright © 2017 Erin Millard
- *
- * For the full copyright and license information, please view the LICENSE file
- * that was distributed with this source code.
- */
-
 namespace Eloquent\Phony\Kahlan;
 
 use Eloquent\Phony\Exporter\Exporter;
 use Eloquent\Phony\Matcher\WrappedMatcher;
+use Kahlan\Arg;
 
 /**
  * A matcher that wraps a Kahlan constraint.
  */
 class KahlanMatcher extends WrappedMatcher
 {
+    /**
+     * Construct a new Kahlan matcher.
+     *
+     * @param Arg                    $matcher   The matcher to wrap.
+     * @param KahlanMatcherDescriber $describer The describer to use.
+     */
+    public function __construct(Arg $matcher, KahlanMatcherDescriber $describer)
+    {
+        parent::__construct($matcher);
+
+        $this->describer = $describer;
+    }
+
     /**
      * Returns `true` if `$value` matches this matcher's criteria.
      *
@@ -28,7 +33,7 @@ class KahlanMatcher extends WrappedMatcher
      */
     public function matches($value)
     {
-        return (bool) $this->matcher->evaluate($value, null, true);
+        return (bool) $this->matcher->match($value);
     }
 
     /**
@@ -40,7 +45,7 @@ class KahlanMatcher extends WrappedMatcher
      */
     public function describe(Exporter $exporter = null)
     {
-        return '<' . $this->matcher->toString() . '>';
+        return $this->describer->describe($this->matcher, $exporter);
     }
 
     /**
@@ -50,6 +55,8 @@ class KahlanMatcher extends WrappedMatcher
      */
     public function __toString()
     {
-        return '<' . $this->matcher->toString() . '>';
+        return $this->describer->describe($this->matcher);
     }
+
+    private $describer;
 }

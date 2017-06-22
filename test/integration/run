@@ -6,4 +6,4 @@ echo Kahlan
 echo ===========================================================================
 echo
 
-vendor/bin/phpunit test/integration
+vendor/bin/kahlan test/integration

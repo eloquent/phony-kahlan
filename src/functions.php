@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Phony package.
- *
- * Copyright © 2017 Erin Millard
- *
- * For the full copyright and license information, please view the LICENSE file
- * that was distributed with this source code.
- */
-
 namespace Eloquent\Phony\Kahlan;
 
 use Eloquent\Phony\Call\Arguments;
@@ -39,7 +30,7 @@ use ReflectionClass;
  *
  * @return MockBuilder The mock builder.
  */
-function mockBuilder($types = array())
+function mockBuilder($types = [])
 {
     return KahlanFacadeDriver::instance()->mockBuilderFactory
         ->create($types);
@@ -56,7 +47,7 @@ function mockBuilder($types = array())
  *
  * @return InstanceHandle A handle around the new mock.
  */
-function mock($types = array())
+function mock($types = [])
 {
     $driver = KahlanFacadeDriver::instance();
 
@@ -81,7 +72,7 @@ function mock($types = array())
  *
  * @return InstanceHandle A handle around the new mock.
  */
-function partialMock($types = array(), $arguments = array())
+function partialMock($types = [], $arguments = [])
 {
     $driver = KahlanFacadeDriver::instance();
 

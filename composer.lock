@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5bb9eaf94fb571c6500c26986c41158",
+    "content-hash": "0f5cd9f3bc419d4287c8d7235f6d91e7",
     "packages": [
         {
             "name": "eloquent/phony",
@@ -67,16 +67,16 @@
         },
         {
             "name": "kahlan/kahlan",
-            "version": "3.1.16",
+            "version": "dev-4.0-phony",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kahlan/kahlan.git",
-                "reference": "6ba171f65bbf95600563911ce6fb083382958869"
+                "reference": "dad9c68293fcfd62e8e732db588f47f0604e3459"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/6ba171f65bbf95600563911ce6fb083382958869",
-                "reference": "6ba171f65bbf95600563911ce6fb083382958869",
+                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/dad9c68293fcfd62e8e732db588f47f0604e3459",
+                "reference": "dad9c68293fcfd62e8e732db588f47f0604e3459",
                 "shasum": ""
             },
             "require": {
@@ -117,7 +117,7 @@
                 "testing",
                 "unit test"
             ],
-            "time": "2017-06-21T22:17:23+00:00"
+            "time": "2017-04-19 10:19:32"
         }
     ],
     "packages-dev": [
@@ -172,7 +172,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kahlan/kahlan": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

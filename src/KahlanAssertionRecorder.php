@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Phony package.
- *
- * Copyright © 2017 Erin Millard
- *
- * For the full copyright and license information, please view the LICENSE file
- * that was distributed with this source code.
- */
-
 namespace Eloquent\Phony\Kahlan;
 
 use Eloquent\Phony\Assertion\AssertionRecorder;
@@ -17,7 +8,6 @@ use Eloquent\Phony\Event\Event;
 use Eloquent\Phony\Event\EventCollection;
 use Eloquent\Phony\Event\EventSequence;
 use Exception;
-use PHPUnit\Framework\Assert;
 
 /**
  * An assertion recorder for Kahlan.
@@ -56,10 +46,8 @@ class KahlanAssertionRecorder implements AssertionRecorder
      *
      * @return EventCollection The result.
      */
-    public function createSuccess(array $events = array())
+    public function createSuccess(array $events = [])
     {
-        Assert::assertThat(true, Assert::isTrue());
-
         return new EventSequence($events, $this->callVerifierFactory);
     }
 
@@ -72,8 +60,6 @@ class KahlanAssertionRecorder implements AssertionRecorder
      */
     public function createSuccessFromEventCollection(EventCollection $events)
     {
-        Assert::assertThat(true, Assert::isTrue());
-
         return $events;
     }
 
