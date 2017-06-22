@@ -30,7 +30,9 @@ class KahlanFacadeDriver extends FacadeDriver
     {
         parent::__construct(new KahlanAssertionRecorder());
 
-        $this->matcherFactory->addMatcherDriver(new KahlanMatcherDriver());
+        $this->matcherFactory->addMatcherDriver(new KahlanMatcherDriver(
+            new KahlanMatcherDescriber($this->exporter)
+        ));
     }
 
     private static $instance;
