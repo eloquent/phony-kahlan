@@ -35,7 +35,7 @@ class KahlanFacadeDriver extends FacadeDriver
             new KahlanMatcherDescriber($this->exporter)
         ));
 
-        Matcher::register('_phony', KahlanFailureMatcher::class);
+        Matcher::register('phonyFailure', KahlanFailureMatcher::class);
     }
 
     private static $instance;

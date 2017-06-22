@@ -76,7 +76,7 @@ class KahlanAssertionRecorder implements AssertionRecorder
      */
     public function createFailure($description)
     {
-        expect(null)->_phony($description);
+        expect(null)->phonyFailure($description);
     }
 
     private static $instance;
