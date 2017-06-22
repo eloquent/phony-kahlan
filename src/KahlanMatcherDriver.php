@@ -1,0 +1,69 @@
+<?php
+
+/*
+ * This file is part of the Phony package.
+ *
+ * Copyright © 2017 Erin Millard
+ *
+ * For the full copyright and license information, please view the LICENSE file
+ * that was distributed with this source code.
+ */
+
+namespace Eloquent\Phony\Kahlan;
+
+use Eloquent\Phony\Matcher\Matchable;
+use Eloquent\Phony\Matcher\MatcherDriver;
+
+/**
+ * A matcher driver for Kahlan constraints.
+ */
+class KahlanMatcherDriver implements MatcherDriver
+{
+    /**
+     * Get the static instance of this driver.
+     *
+     * @return MatcherDriver The static driver.
+     */
+    public static function instance()
+    {
+        if (!self::$instance) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
+    /**
+     * Returns true if this matcher driver's classes or interfaces exist.
+     *
+     * @return bool True if available.
+     */
+    public function isAvailable()
+    {
+        return class_exists('PHPUnit\Framework\Constraint\Constraint');
+    }
+
+    /**
+     * Get the supported matcher class names.
+     *
+     * @return array<string> The matcher class names.
+     */
+    public function matcherClassNames()
+    {
+        return array('PHPUnit\Framework\Constraint\Constraint');
+    }
+
+    /**
+     * Wrap the supplied third party matcher.
+     *
+     * @param object $matcher The matcher to wrap.
+     *
+     * @return Matchable The wrapped matcher.
+     */
+    public function wrapMatcher($matcher)
+    {
+        return new KahlanMatcher($matcher);
+    }
+
+    private static $instance;
+}

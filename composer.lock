@@ -1,0 +1,185 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "f5bb9eaf94fb571c6500c26986c41158",
+    "packages": [
+        {
+            "name": "eloquent/phony",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eloquent/phony.git",
+                "reference": "418375e6714efb3db0defcd0ffe0ac4159e126f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eloquent/phony/zipball/418375e6714efb3db0defcd0ffe0ac4159e126f1",
+                "reference": "418375e6714efb3db0defcd0ffe0ac4159e126f1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "errors/exceptions": "^0.1",
+                "ext-pdo": "*",
+                "hamcrest/hamcrest-php": "^2",
+                "icecave/semver": "^3",
+                "phpunit/phpunit": "^4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Eloquent\\Phony\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erin Millard",
+                    "email": "ezzatron@gmail.com",
+                    "homepage": "http://ezzatron.com/"
+                }
+            ],
+            "description": "Mocks, stubs, and spies for PHP.",
+            "homepage": "http://eloquent-software.com/phony/",
+            "keywords": [
+                "Double",
+                "Dummy",
+                "fake",
+                "mock",
+                "mocking",
+                "spy",
+                "stub",
+                "stubbing",
+                "test"
+            ],
+            "time": "2017-04-24T08:40:13+00:00"
+        },
+        {
+            "name": "kahlan/kahlan",
+            "version": "3.1.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kahlan/kahlan.git",
+                "reference": "6ba171f65bbf95600563911ce6fb083382958869"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/6ba171f65bbf95600563911ce6fb083382958869",
+                "reference": "6ba171f65bbf95600563911ce6fb083382958869",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^2.7"
+            },
+            "bin": [
+                "bin/kahlan"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kahlan\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CrysaLEAD"
+                }
+            ],
+            "description": "The PHP Test Framework for Freedom, Truth and Justice.",
+            "keywords": [
+                "BDD",
+                "Behavior-Driven Development",
+                "Monkey Patching",
+                "TDD",
+                "mock",
+                "stub",
+                "testing",
+                "unit test"
+            ],
+            "time": "2017-06-21T22:17:23+00:00"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "errors/exceptions",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-errors/exceptions.git",
+                "reference": "3e487e8b7b8723afa8d3985534d12b5273b71d97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-errors/exceptions/zipball/3e487e8b7b8723afa8d3985534d12b5273b71d97",
+                "reference": "3e487e8b7b8723afa8d3985534d12b5273b71d97",
+                "shasum": ""
+            },
+            "conflict": {
+                "errors/native": "*"
+            },
+            "require-dev": {
+                "errors/specification": "^0.1"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/handler.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erin Millard",
+                    "email": "ezzatron@gmail.com",
+                    "homepage": "http://ezzatron.com/"
+                }
+            ],
+            "description": "An error handler that produces error exceptions when a native error occurs.",
+            "homepage": "https://github.com/php-errors/exceptions",
+            "keywords": [
+                "error",
+                "errorexception",
+                "errors",
+                "exception",
+                "handler"
+            ],
+            "time": "2016-12-12T23:18:54+00:00"
+        }
+    ],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=7"
+    },
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "7.0.99999"
+    }
+}

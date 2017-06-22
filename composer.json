@@ -1,0 +1,40 @@
+{
+    "name": "eloquent/phony-kahlan",
+    "description": "Phony for Kahlan.",
+    "keywords": ["mock", "mocking", "stub", "stubbing", "spy", "dummy", "double", "test", "fake"],
+    "homepage": "http://eloquent-software.com/phony/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Erin Millard",
+            "email": "ezzatron@gmail.com",
+            "homepage": "http://ezzatron.com/"
+        }
+    ],
+    "require": {
+        "php": ">=7",
+        "eloquent/phony": "^1",
+        "kahlan/kahlan": "^3"
+    },
+    "require-dev": {
+        "errors/exceptions": "^0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Eloquent\\Phony\\Kahlan\\": "src"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Eloquent\\Phony\\Kahlan\\": "test/src"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "7.0.99999"
+        }
+    }
+}
