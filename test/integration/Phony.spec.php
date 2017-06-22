@@ -2,26 +2,22 @@
 
 use Eloquent\Phony\Kahlan\Phony;
 
-class PhonyTest extends TestCase
-{
-    protected function setUp()
-    {
+describe('Phony', function () {
+    beforeEach(function () {
         $this->handle = Phony::mock('Eloquent\Phony\Kahlan\Test\TestClassA');
         $this->mock = $this->handle->get();
-    }
+    });
 
-    public function testShouldRecordPassingMockAssertions()
-    {
+    it('should record passing mock assertions', function () {
         $this->mock->testClassAMethodA('aardvark', 'bonobo');
 
         $this->handle->testClassAMethodA->calledWith('aardvark', 'bonobo');
-    }
+    });
 
-    public function testShouldRecordFailingMockAssertions()
-    {
+    it('should record failing mock assertions', function () {
         $this->mock->testClassAMethodA('aardvark', ['bonobo', 'capybara', 'dugong']);
         $this->mock->testClassAMethodA('armadillo', ['bonobo', 'chameleon', 'dormouse']);
 
         $this->handle->testClassAMethodA->calledWith('aardvark', ['bonobo', 'chameleon', 'dugong']);
-    }
-}
+    });
+});

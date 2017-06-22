@@ -48,6 +48,8 @@ class KahlanAssertionRecorder implements AssertionRecorder
      */
     public function createSuccess(array $events = [])
     {
+        expect(null)->toBe(null);
+
         return new EventSequence($events, $this->callVerifierFactory);
     }
 
@@ -60,6 +62,8 @@ class KahlanAssertionRecorder implements AssertionRecorder
      */
     public function createSuccessFromEventCollection(EventCollection $events)
     {
+        expect(null)->toBe(null);
+
         return $events;
     }
 
@@ -72,7 +76,7 @@ class KahlanAssertionRecorder implements AssertionRecorder
      */
     public function createFailure($description)
     {
-        throw new KahlanAssertionException($description);
+        expect(null)->_phony($description);
     }
 
     private static $instance;

@@ -3,6 +3,7 @@
 namespace Eloquent\Phony\Kahlan;
 
 use Eloquent\Phony\Facade\FacadeDriver;
+use Kahlan\Matcher;
 
 /**
  * A facade driver for Kahlan.
@@ -33,6 +34,8 @@ class KahlanFacadeDriver extends FacadeDriver
         $this->matcherFactory->addMatcherDriver(new KahlanMatcherDriver(
             new KahlanMatcherDescriber($this->exporter)
         ));
+
+        Matcher::register('_phony', KahlanFailureMatcher::class);
     }
 
     private static $instance;

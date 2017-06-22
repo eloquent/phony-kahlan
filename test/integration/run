@@ -6,4 +6,4 @@ echo Kahlan
 echo ===========================================================================
 echo
 
-vendor/bin/kahlan test/integration
+vendor/bin/kahlan --spec=test/integration
