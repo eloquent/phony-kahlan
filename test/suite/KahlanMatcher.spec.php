@@ -35,6 +35,12 @@ describe('KahlanMatcher', function () {
                 expect($this->subject->describe())->toBe('<toBe ("value")>');
             });
         });
+
+        context('string representation', function () {
+            it('should describe the underlying matcher', function () {
+                expect(strval($this->subject))->toBe('<toBe ("value")>');
+            });
+        });
     });
 
     context('with a negated matcher', function () {
@@ -55,6 +61,12 @@ describe('KahlanMatcher', function () {
         context('describe()', function () {
             it('should describe the underlying matcher', function () {
                 expect($this->subject->describe())->toBe('<notToBe ("value")>');
+            });
+        });
+
+        context('string representation', function () {
+            it('should describe the underlying matcher', function () {
+                expect(strval($this->subject))->toBe('<notToBe ("value")>');
             });
         });
     });
