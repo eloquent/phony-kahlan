@@ -9,14 +9,14 @@ use Kahlan\Arg;
 use function Eloquent\Phony\restoreGlobalFunctions;
 use function Eloquent\Phony\stubGlobal;
 
-describe('KahlanMatcherDriver', function () {
+describe('ArgumentMatcherDriver', function () {
     beforeEach(function () {
         $this->sequence = Sequencer::sequence(md5(mt_rand()));
         $this->invocableInspector = InvocableInspector::instance();
         $this->exporter = new InlineExporter(1, $this->sequence, $this->invocableInspector);
-        $this->describer = new KahlanMatcherDescriber($this->exporter);
+        $this->describer = new ArgumentMatcherDescriber($this->exporter);
 
-        $this->subject = new KahlanMatcherDriver($this->describer);
+        $this->subject = new ArgumentMatcherDriver($this->describer);
     });
 
     afterEach(function () {
@@ -45,7 +45,7 @@ describe('KahlanMatcherDriver', function () {
 
     context('wrapMatcher()', function () {
         it('should wrap the supplied matcher', function () {
-            expect($this->subject->wrapMatcher(Arg::toBe('a')))->toBeAnInstanceOf(KahlanMatcher::class);
+            expect($this->subject->wrapMatcher(Arg::toBe('a')))->toBeAnInstanceOf(ArgumentMatcher::class);
         });
     });
 });

@@ -14,7 +14,7 @@
     "require": {
         "php": ">=7",
         "eloquent/phony": "^1",
-        "kahlan/kahlan": "dev-4.0-phony"
+        "kahlan/kahlan": "dev-phony"
     },
     "require-dev": {
         "errors/exceptions": "^0.1"
@@ -36,5 +36,11 @@
         "platform": {
             "php": "7.0.99999"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/ezzatron/kahlan"
+        }
+    ]
 }

@@ -7,17 +7,17 @@ use Eloquent\Phony\Invocation\InvocableInspector;
 use Eloquent\Phony\Sequencer\Sequencer;
 use Kahlan\Arg;
 
-describe('KahlanMatcher', function () {
+describe('ArgumentMatcher', function () {
     beforeEach(function () {
         $this->sequence = Sequencer::sequence(md5(mt_rand()));
         $this->invocableInspector = InvocableInspector::instance();
         $this->exporter = new InlineExporter(1, $this->sequence, $this->invocableInspector);
-        $this->describer = new KahlanMatcherDescriber($this->exporter);
+        $this->describer = new ArgumentMatcherDescriber($this->exporter);
     });
 
     context('with a regular matcher', function () {
         beforeEach(function () {
-            $this->subject = new KahlanMatcher(Arg::toBe('value'), $this->describer);
+            $this->subject = new ArgumentMatcher(Arg::toBe('value'), $this->describer);
         });
 
         context('matches()', function () {
@@ -45,7 +45,7 @@ describe('KahlanMatcher', function () {
 
     context('with a negated matcher', function () {
         beforeEach(function () {
-            $this->subject = new KahlanMatcher(Arg::notToBe('value'), $this->describer);
+            $this->subject = new ArgumentMatcher(Arg::notToBe('value'), $this->describer);
         });
 
         context('matches()', function () {

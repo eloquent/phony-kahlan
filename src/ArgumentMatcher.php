@@ -7,18 +7,20 @@ use Eloquent\Phony\Matcher\WrappedMatcher;
 use Kahlan\Arg;
 
 /**
- * A matcher that wraps a Kahlan constraint.
+ * A matcher that wraps a Kahlan argument matcher.
  */
-class KahlanMatcher extends WrappedMatcher
+class ArgumentMatcher extends WrappedMatcher
 {
     /**
-     * Construct a new Kahlan matcher.
+     * Construct a new argument matcher.
      *
-     * @param Arg                    $matcher   The matcher to wrap.
-     * @param KahlanMatcherDescriber $describer The describer to use.
+     * @param Arg                      $matcher   The matcher to wrap.
+     * @param ArgumentMatcherDescriber $describer The describer to use.
      */
-    public function __construct(Arg $matcher, KahlanMatcherDescriber $describer)
-    {
+    public function __construct(
+        Arg $matcher,
+        ArgumentMatcherDescriber $describer
+    ) {
         parent::__construct($matcher);
 
         $this->describer = $describer;

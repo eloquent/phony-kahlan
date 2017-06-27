@@ -6,16 +6,16 @@ use Eloquent\Phony\Matcher\Matchable;
 use Eloquent\Phony\Matcher\MatcherDriver;
 
 /**
- * A matcher driver for Kahlan constraints.
+ * A matcher driver for Kahlan argument matchers.
  */
-class KahlanMatcherDriver implements MatcherDriver
+class ArgumentMatcherDriver implements MatcherDriver
 {
     /**
      * Construct a new Kahlan matcher driver.
      *
-     * @param KahlanMatcherDescriber $describer The describer to use.
+     * @param ArgumentMatcherDescriber $describer The describer to use.
      */
-    public function __construct(KahlanMatcherDescriber $describer)
+    public function __construct(ArgumentMatcherDescriber $describer)
     {
         $this->describer = $describer;
     }
@@ -49,7 +49,7 @@ class KahlanMatcherDriver implements MatcherDriver
      */
     public function wrapMatcher($matcher)
     {
-        return new KahlanMatcher($matcher, $this->describer);
+        return new ArgumentMatcher($matcher, $this->describer);
     }
 
     private $describer;

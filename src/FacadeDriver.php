@@ -2,13 +2,13 @@
 
 namespace Eloquent\Phony\Kahlan;
 
-use Eloquent\Phony\Facade\FacadeDriver;
+use Eloquent\Phony\Facade\FacadeDriver as PhonyFacadeDriver;
 use Kahlan\Matcher;
 
 /**
  * A facade driver for Kahlan.
  */
-class KahlanFacadeDriver extends FacadeDriver
+class FacadeDriver extends PhonyFacadeDriver
 {
     /**
      * Get the static instance of this driver.
@@ -29,13 +29,14 @@ class KahlanFacadeDriver extends FacadeDriver
      */
     public function __construct()
     {
-        parent::__construct(new KahlanAssertionRecorder());
+        parent::__construct(new AssertionRecorder());
 
-        $this->matcherFactory->addMatcherDriver(new KahlanMatcherDriver(
-            new KahlanMatcherDescriber($this->exporter)
+        $this->matcherFactory->addMatcherDriver(new ArgumentMatcherDriver(
+            new ArgumentMatcherDescriber($this->exporter)
         ));
 
-        Matcher::register('phonyFailure', KahlanFailureMatcher::class);
+        Matcher::register('phonyFail', FailMatcher::class);
+        Matcher::register('phonyPass', PassMatcher::class);
     }
 
     private static $instance;

@@ -2,7 +2,7 @@
 
 namespace Eloquent\Phony\Kahlan;
 
-use Eloquent\Phony\Assertion\AssertionRecorder;
+use Eloquent\Phony\Assertion\AssertionRecorder as PhonyAssertionRecorder;
 use Eloquent\Phony\Call\CallVerifierFactory;
 use Eloquent\Phony\Event\Event;
 use Eloquent\Phony\Event\EventCollection;
@@ -12,22 +12,8 @@ use Exception;
 /**
  * An assertion recorder for Kahlan.
  */
-class KahlanAssertionRecorder implements AssertionRecorder
+class AssertionRecorder implements PhonyAssertionRecorder
 {
-    /**
-     * Get the static instance of this recorder.
-     *
-     * @return AssertionRecorder The static recorder.
-     */
-    public static function instance()
-    {
-        if (!self::$instance) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
-
     /**
      * Set the call verifier factory.
      *
@@ -48,9 +34,10 @@ class KahlanAssertionRecorder implements AssertionRecorder
      */
     public function createSuccess(array $events = [])
     {
-        expect(null)->toBe(null);
+        $result = new EventSequence($events, $this->callVerifierFactory);
+        expect(null)->phonyPass($result);
 
-        return new EventSequence($events, $this->callVerifierFactory);
+        return $result;
     }
 
     /**
@@ -62,7 +49,7 @@ class KahlanAssertionRecorder implements AssertionRecorder
      */
     public function createSuccessFromEventCollection(EventCollection $events)
     {
-        expect(null)->toBe(null);
+        expect(null)->phonyPass($events);
 
         return $events;
     }
@@ -76,9 +63,8 @@ class KahlanAssertionRecorder implements AssertionRecorder
      */
     public function createFailure($description)
     {
-        expect(null)->phonyFailure($description);
+        expect(null)->phonyFail($description);
     }
 
-    private static $instance;
     private $callVerifierFactory;
 }

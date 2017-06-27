@@ -3,7 +3,6 @@
 namespace Eloquent\Phony\Kahlan;
 
 use Eloquent\Phony\Facade\AbstractFacade;
-use Eloquent\Phony\Facade\FacadeDriver;
 
 /**
  * A facade for Phony usage under Kahlan.
@@ -17,6 +16,6 @@ class Phony extends AbstractFacade
      */
     protected static function driver()
     {
-        return KahlanFacadeDriver::instance();
+        return FacadeDriver::instance();
     }
 }

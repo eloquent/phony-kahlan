@@ -9,10 +9,10 @@ use ReflectionClass;
 /**
  * Describes Kahlan argument matchers.
  */
-class KahlanMatcherDescriber
+class ArgumentMatcherDescriber
 {
     /**
-     * Construct a new Kahlan matcher describer.
+     * Construct a new argument matcher describer.
      *
      * @param Exporter $exporter The exporter to use.
      */

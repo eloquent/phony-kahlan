@@ -32,8 +32,7 @@ use ReflectionClass;
  */
 function mockBuilder($types = [])
 {
-    return KahlanFacadeDriver::instance()->mockBuilderFactory
-        ->create($types);
+    return FacadeDriver::instance()->mockBuilderFactory->create($types);
 }
 
 /**
@@ -49,7 +48,7 @@ function mockBuilder($types = [])
  */
 function mock($types = [])
 {
-    $driver = KahlanFacadeDriver::instance();
+    $driver = FacadeDriver::instance();
 
     return $driver->handleFactory->instanceHandle(
         $driver->mockBuilderFactory->create($types)->full()
@@ -74,7 +73,7 @@ function mock($types = [])
  */
 function partialMock($types = [], $arguments = [])
 {
-    $driver = KahlanFacadeDriver::instance();
+    $driver = FacadeDriver::instance();
 
     return $driver->handleFactory->instanceHandle(
         $driver->mockBuilderFactory->create($types)->partialWith($arguments)
@@ -91,8 +90,7 @@ function partialMock($types = [], $arguments = [])
  */
 function on($mock)
 {
-    return KahlanFacadeDriver::instance()->handleFactory
-        ->instanceHandle($mock);
+    return FacadeDriver::instance()->handleFactory->instanceHandle($mock);
 }
 
 /**
@@ -105,7 +103,7 @@ function on($mock)
  */
 function onStatic($class)
 {
-    return KahlanFacadeDriver::instance()->handleFactory->staticHandle($class);
+    return FacadeDriver::instance()->handleFactory->staticHandle($class);
 }
 
 /**
@@ -117,7 +115,7 @@ function onStatic($class)
  */
 function spy($callback = null)
 {
-    return KahlanFacadeDriver::instance()->spyVerifierFactory
+    return FacadeDriver::instance()->spyVerifierFactory
         ->createFromCallback($callback);
 }
 
@@ -132,7 +130,7 @@ function spy($callback = null)
  */
 function spyGlobal($function, $namespace)
 {
-    return KahlanFacadeDriver::instance()->spyVerifierFactory
+    return FacadeDriver::instance()->spyVerifierFactory
         ->createGlobal($function, $namespace);
 }
 
@@ -145,7 +143,7 @@ function spyGlobal($function, $namespace)
  */
 function stub($callback = null)
 {
-    return KahlanFacadeDriver::instance()->stubVerifierFactory
+    return FacadeDriver::instance()->stubVerifierFactory
         ->createFromCallback($callback);
 }
 
@@ -163,7 +161,7 @@ function stub($callback = null)
  */
 function stubGlobal($function, $namespace)
 {
-    return KahlanFacadeDriver::instance()->stubVerifierFactory
+    return FacadeDriver::instance()->stubVerifierFactory
         ->createGlobal($function, $namespace);
 }
 
@@ -173,7 +171,7 @@ function stubGlobal($function, $namespace)
  */
 function restoreGlobalFunctions()
 {
-    return KahlanFacadeDriver::instance()->functionHookManager
+    return FacadeDriver::instance()->functionHookManager
         ->restoreGlobalFunctions();
 }
 
@@ -186,7 +184,7 @@ function restoreGlobalFunctions()
  */
 function checkInOrder()
 {
-    return KahlanFacadeDriver::instance()->eventOrderVerifier
+    return FacadeDriver::instance()->eventOrderVerifier
         ->checkInOrderSequence(func_get_args());
 }
 
@@ -201,7 +199,7 @@ function checkInOrder()
  */
 function inOrder()
 {
-    return KahlanFacadeDriver::instance()->eventOrderVerifier
+    return FacadeDriver::instance()->eventOrderVerifier
         ->inOrderSequence(func_get_args());
 }
 
@@ -214,7 +212,7 @@ function inOrder()
  */
 function checkInOrderSequence($events)
 {
-    return KahlanFacadeDriver::instance()->eventOrderVerifier
+    return FacadeDriver::instance()->eventOrderVerifier
         ->checkInOrderSequence($events);
 }
 
@@ -229,7 +227,7 @@ function checkInOrderSequence($events)
  */
 function inOrderSequence($events)
 {
-    return KahlanFacadeDriver::instance()->eventOrderVerifier
+    return FacadeDriver::instance()->eventOrderVerifier
         ->inOrderSequence($events);
 }
 
@@ -243,7 +241,7 @@ function inOrderSequence($events)
  */
 function checkAnyOrder()
 {
-    return KahlanFacadeDriver::instance()->eventOrderVerifier
+    return FacadeDriver::instance()->eventOrderVerifier
         ->checkAnyOrderSequence(func_get_args());
 }
 
@@ -258,7 +256,7 @@ function checkAnyOrder()
  */
 function anyOrder()
 {
-    return KahlanFacadeDriver::instance()->eventOrderVerifier
+    return FacadeDriver::instance()->eventOrderVerifier
         ->anyOrderSequence(func_get_args());
 }
 
@@ -272,7 +270,7 @@ function anyOrder()
  */
 function checkAnyOrderSequence($events)
 {
-    return KahlanFacadeDriver::instance()->eventOrderVerifier
+    return FacadeDriver::instance()->eventOrderVerifier
         ->checkAnyOrderSequence($events);
 }
 
@@ -288,7 +286,7 @@ function checkAnyOrderSequence($events)
  */
 function anyOrderSequence($events)
 {
-    return KahlanFacadeDriver::instance()->eventOrderVerifier
+    return FacadeDriver::instance()->eventOrderVerifier
         ->anyOrderSequence($events);
 }
 
@@ -299,7 +297,7 @@ function anyOrderSequence($events)
  */
 function any()
 {
-    return KahlanFacadeDriver::instance()->matcherFactory->any();
+    return FacadeDriver::instance()->matcherFactory->any();
 }
 
 /**
@@ -311,8 +309,7 @@ function any()
  */
 function equalTo($value)
 {
-    return KahlanFacadeDriver::instance()->matcherFactory
-        ->equalTo($value, false);
+    return FacadeDriver::instance()->matcherFactory->equalTo($value, false);
 }
 
 /**
@@ -329,7 +326,7 @@ function wildcard(
     $minimumArguments = 0,
     $maximumArguments = null
 ) {
-    return KahlanFacadeDriver::instance()->matcherFactory
+    return FacadeDriver::instance()->matcherFactory
         ->wildcard($value, $minimumArguments, $maximumArguments);
 }
 
@@ -344,7 +341,7 @@ function wildcard(
  */
 function setExportDepth($depth)
 {
-    return KahlanFacadeDriver::instance()->exporter->setDepth($depth);
+    return FacadeDriver::instance()->exporter->setDepth($depth);
 }
 
 /**
@@ -356,7 +353,7 @@ function setExportDepth($depth)
  */
 function setUseColor($useColor)
 {
-    $facade = KahlanFacadeDriver::instance();
+    $facade = FacadeDriver::instance();
 
     $facade->assertionRenderer->setUseColor($useColor);
     $facade->differenceEngine->setUseColor($useColor);
