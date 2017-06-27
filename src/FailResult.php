@@ -30,11 +30,14 @@ class FailResult
     /**
      * Get the failure description.
      *
-     * @return string The description.
+     * @return array The description.
      */
     public function description()
     {
-        return $this->description;
+        return [
+            'description' => '',
+            'data' => ['raw' => $this->description]
+        ];
     }
 
     /**
