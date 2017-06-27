@@ -3,11 +3,13 @@
 namespace Eloquent\Phony\Kahlan;
 
 use Eloquent\Phony\Assertion\AssertionRecorder as PhonyAssertionRecorder;
+use Eloquent\Phony\Assertion\Exception\AssertionException;
 use Eloquent\Phony\Call\CallVerifierFactory;
 use Eloquent\Phony\Event\Event;
 use Eloquent\Phony\Event\EventCollection;
 use Eloquent\Phony\Event\EventSequence;
 use Exception;
+use Kahlan\Suite;
 
 /**
  * An assertion recorder for Kahlan.
@@ -34,10 +36,9 @@ class AssertionRecorder implements PhonyAssertionRecorder
      */
     public function createSuccess(array $events = [])
     {
-        $result = new EventSequence($events, $this->callVerifierFactory);
-        expect(null)->phonyPass($result);
+        Suite::current()->expectExternal(['callback' => function () {}]);
 
-        return $result;
+        return new EventSequence($events, $this->callVerifierFactory);
     }
 
     /**
@@ -49,7 +50,7 @@ class AssertionRecorder implements PhonyAssertionRecorder
      */
     public function createSuccessFromEventCollection(EventCollection $events)
     {
-        expect(null)->phonyPass($events);
+        Suite::current()->expectExternal(['callback' => function () {}]);
 
         return $events;
     }
@@ -63,7 +64,11 @@ class AssertionRecorder implements PhonyAssertionRecorder
      */
     public function createFailure($description)
     {
-        expect(null)->phonyFail($description);
+        Suite::current()->expectExternal([
+            'callback' => function () use ($description) {
+                throw new AssertionException($description);
+            },
+        ]);
     }
 
     private $callVerifierFactory;

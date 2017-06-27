@@ -36,7 +36,7 @@ class FailResult
     {
         return [
             'description' => '',
-            'data' => ['raw' => $this->description]
+            'data' => ['raw' => $this->description],
         ];
     }
 
