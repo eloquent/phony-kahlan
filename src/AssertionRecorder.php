@@ -64,9 +64,11 @@ class AssertionRecorder implements PhonyAssertionRecorder
      */
     public function createFailure($description)
     {
+        $exception = new AssertionException($description);
+
         Suite::current()->expectExternal([
-            'callback' => function () use ($description) {
-                throw new AssertionException($description);
+            'callback' => function () use ($exception) {
+                throw $exception;
             },
         ]);
     }
