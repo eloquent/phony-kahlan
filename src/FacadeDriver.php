@@ -7,6 +7,7 @@ use Kahlan\Block\Group;
 use Kahlan\Block\Specification;
 use Kahlan\Filter\Chain;
 use Kahlan\Filter\Filter;
+use Kahlan\Suite;
 
 /**
  * A facade driver for Kahlan.
@@ -57,6 +58,7 @@ class FacadeDriver extends PhonyFacadeDriver
 
         Filter::apply(Group::class, 'executeClosure', 'phony.execute');
         Filter::apply(Specification::class, 'executeClosure', 'phony.execute');
+        Filter::apply(Suite::class, 'executeClosure', 'phony.execute');
     }
 
     private static $instance;

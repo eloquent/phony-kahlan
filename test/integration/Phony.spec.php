@@ -6,13 +6,17 @@ use Eloquent\Phony\Stub\StubVerifier;
 use Kahlan\Arg;
 use function Eloquent\Phony\Kahlan\on;
 
-describe('Phony', function () {
+describe('Phony', function (DateTime $dateTime) {
     beforeEach(function (TestClassA $mock) {
         $this->mock = $mock;
         $this->handle = on($mock);
     });
 
     it('should support auto-injected mocks', function (DateTime $dateTime) {
+        expect($dateTime)->toBeAnInstanceOf(Mock::class);
+    });
+
+    it('should support auto-injected mocks in describe blocks', function () use ($dateTime) {
         expect($dateTime)->toBeAnInstanceOf(Mock::class);
     });
 
