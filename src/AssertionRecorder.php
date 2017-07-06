@@ -50,7 +50,10 @@ class AssertionRecorder implements PhonyAssertionRecorder
      */
     public function createSuccessFromEventCollection(EventCollection $events)
     {
-        Suite::current()->expectExternal(['callback' => function () {}]);
+        Suite::current()->expectExternal([
+            'callback' => function () {},
+            'type' => AssertionException::class,
+        ]);
 
         return $events;
     }
