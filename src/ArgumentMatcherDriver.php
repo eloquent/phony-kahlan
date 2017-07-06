@@ -11,16 +11,6 @@ use Eloquent\Phony\Matcher\MatcherDriver;
 class ArgumentMatcherDriver implements MatcherDriver
 {
     /**
-     * Construct a new Kahlan matcher driver.
-     *
-     * @param ArgumentMatcherDescriber $describer The describer to use.
-     */
-    public function __construct(ArgumentMatcherDescriber $describer)
-    {
-        $this->describer = $describer;
-    }
-
-    /**
      * Returns true if this matcher driver's classes or interfaces exist.
      *
      * @return bool True if available.
@@ -49,8 +39,6 @@ class ArgumentMatcherDriver implements MatcherDriver
      */
     public function wrapMatcher($matcher)
     {
-        return new ArgumentMatcher($matcher, $this->describer);
+        return new ArgumentMatcher($matcher);
     }
-
-    private $describer;
 }

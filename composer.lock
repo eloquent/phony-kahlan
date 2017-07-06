@@ -71,12 +71,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezzatron/kahlan.git",
-                "reference": "66fa8ff065f242ba2faa981ee38196f991da698f"
+                "reference": "eb9fbfab1a989c2d215dccfb2133b51bd4fe6a80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezzatron/kahlan/zipball/66fa8ff065f242ba2faa981ee38196f991da698f",
-                "reference": "66fa8ff065f242ba2faa981ee38196f991da698f",
+                "url": "https://api.github.com/repos/ezzatron/kahlan/zipball/eb9fbfab1a989c2d215dccfb2133b51bd4fe6a80",
+                "reference": "eb9fbfab1a989c2d215dccfb2133b51bd4fe6a80",
                 "shasum": ""
             },
             "require": {
@@ -127,9 +127,9 @@
                 "Unit Test"
             ],
             "support": {
-                "source": "https://github.com/ezzatron/kahlan/tree/external-expectation"
+                "source": "https://github.com/ezzatron/kahlan/tree/phony"
             },
-            "time": "2017-07-06 00:00:24"
+            "time": "2017-07-06 01:06:05"
         }
     ],
     "packages-dev": [

@@ -12,12 +12,11 @@ describe('ArgumentMatcher', function () {
         $this->sequence = Sequencer::sequence(md5(mt_rand()));
         $this->invocableInspector = InvocableInspector::instance();
         $this->exporter = new InlineExporter(1, $this->sequence, $this->invocableInspector);
-        $this->describer = new ArgumentMatcherDescriber($this->exporter);
     });
 
     context('with a regular matcher', function () {
         beforeEach(function () {
-            $this->subject = new ArgumentMatcher(Arg::toBe('value'), $this->describer);
+            $this->subject = new ArgumentMatcher(Arg::toBe('value'));
         });
 
         context('matches()', function () {
@@ -32,20 +31,20 @@ describe('ArgumentMatcher', function () {
 
         context('describe()', function () {
             it('should describe the underlying matcher', function () {
-                expect($this->subject->describe())->toBe('<toBe ("value")>');
+                expect($this->subject->describe())->toBe('<toBe("value")>');
             });
         });
 
         context('string representation', function () {
             it('should describe the underlying matcher', function () {
-                expect(strval($this->subject))->toBe('<toBe ("value")>');
+                expect(strval($this->subject))->toBe('<toBe("value")>');
             });
         });
     });
 
     context('with a negated matcher', function () {
         beforeEach(function () {
-            $this->subject = new ArgumentMatcher(Arg::notToBe('value'), $this->describer);
+            $this->subject = new ArgumentMatcher(Arg::notToBe('value'));
         });
 
         context('matches()', function () {
@@ -60,13 +59,13 @@ describe('ArgumentMatcher', function () {
 
         context('describe()', function () {
             it('should describe the underlying matcher', function () {
-                expect($this->subject->describe())->toBe('<notToBe ("value")>');
+                expect($this->subject->describe())->toBe('<notToBe("value")>');
             });
         });
 
         context('string representation', function () {
             it('should describe the underlying matcher', function () {
-                expect(strval($this->subject))->toBe('<notToBe ("value")>');
+                expect(strval($this->subject))->toBe('<notToBe("value")>');
             });
         });
     });

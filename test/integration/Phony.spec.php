@@ -1,5 +1,6 @@
 <?php
 
+use Kahlan\Arg;
 use function Eloquent\Phony\Kahlan\mock;
 
 describe('Phony', function () {
@@ -19,5 +20,12 @@ describe('Phony', function () {
         $this->mock->testClassAMethodA('armadillo', ['bonobo', 'chameleon', 'dormouse']);
 
         $this->handle->testClassAMethodA->calledWith('aardvark', ['bonobo', 'chameleon', 'dugong']);
+    });
+
+    it('should support argument matcher integrations', function () {
+        $this->mock->testClassAMethodA(111);
+        $this->mock->testClassAMethodA(222);
+
+        $this->handle->testClassAMethodA->calledWith(Arg::toBeGreaterThan(333));
     });
 });

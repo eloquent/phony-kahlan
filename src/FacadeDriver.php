@@ -31,9 +31,7 @@ class FacadeDriver extends PhonyFacadeDriver
     {
         parent::__construct(new AssertionRecorder());
 
-        $this->matcherFactory->addMatcherDriver(new ArgumentMatcherDriver(
-            new ArgumentMatcherDescriber($this->exporter)
-        ));
+        $this->matcherFactory->addMatcherDriver(new ArgumentMatcherDriver());
 
         Matcher::register('phonyFail', FailMatcher::class);
         Matcher::register('phonyPass', PassMatcher::class);

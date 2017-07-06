@@ -14,9 +14,8 @@ describe('ArgumentMatcherDriver', function () {
         $this->sequence = Sequencer::sequence(md5(mt_rand()));
         $this->invocableInspector = InvocableInspector::instance();
         $this->exporter = new InlineExporter(1, $this->sequence, $this->invocableInspector);
-        $this->describer = new ArgumentMatcherDescriber($this->exporter);
 
-        $this->subject = new ArgumentMatcherDriver($this->describer);
+        $this->subject = new ArgumentMatcherDriver();
     });
 
     afterEach(function () {
