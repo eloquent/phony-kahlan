@@ -70,6 +70,7 @@ class AssertionRecorder implements PhonyAssertionRecorder
             'callback' => function () use ($exception) {
                 throw $exception;
             },
+            'type' => AssertionException::class,
         ]);
     }
 

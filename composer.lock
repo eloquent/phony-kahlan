@@ -8,23 +8,23 @@
     "packages": [
         {
             "name": "eloquent/phony",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eloquent/phony.git",
-                "reference": "418375e6714efb3db0defcd0ffe0ac4159e126f1"
+                "reference": "bff87a1c7c302a05d29b0aa2149bed8fc9f7627b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eloquent/phony/zipball/418375e6714efb3db0defcd0ffe0ac4159e126f1",
-                "reference": "418375e6714efb3db0defcd0ffe0ac4159e126f1",
+                "url": "https://api.github.com/repos/eloquent/phony/zipball/bff87a1c7c302a05d29b0aa2149bed8fc9f7627b",
+                "reference": "bff87a1c7c302a05d29b0aa2149bed8fc9f7627b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3"
             },
             "require-dev": {
-                "errors/exceptions": "^0.1",
+                "errors/exceptions": "^0.2",
                 "ext-pdo": "*",
                 "hamcrest/hamcrest-php": "^2",
                 "icecave/semver": "^3",
@@ -63,7 +63,7 @@
                 "stubbing",
                 "test"
             ],
-            "time": "2017-04-24T08:40:13+00:00"
+            "time": "2017-07-04T01:10:30+00:00"
         },
         {
             "name": "kahlan/kahlan",
@@ -71,12 +71,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezzatron/kahlan.git",
-                "reference": "79eba50b220fd8d50c23cba17a62f7e3d795ac04"
+                "reference": "66fa8ff065f242ba2faa981ee38196f991da698f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezzatron/kahlan/zipball/79eba50b220fd8d50c23cba17a62f7e3d795ac04",
-                "reference": "79eba50b220fd8d50c23cba17a62f7e3d795ac04",
+                "url": "https://api.github.com/repos/ezzatron/kahlan/zipball/66fa8ff065f242ba2faa981ee38196f991da698f",
+                "reference": "66fa8ff065f242ba2faa981ee38196f991da698f",
                 "shasum": ""
             },
             "require": {
@@ -127,9 +127,9 @@
                 "Unit Test"
             ],
             "support": {
-                "source": "https://github.com/ezzatron/kahlan/tree/phony"
+                "source": "https://github.com/ezzatron/kahlan/tree/external-expectation"
             },
-            "time": "2017-06-27 02:54:10"
+            "time": "2017-07-06 00:00:24"
         }
     ],
     "packages-dev": [
