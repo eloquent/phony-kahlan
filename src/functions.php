@@ -20,6 +20,14 @@ use InvalidArgumentException;
 use ReflectionClass;
 
 /**
+ * Install Phony for Kahlan.
+ */
+function install()
+{
+    return FacadeDriver::instance()->install();
+}
+
+/**
  * Create a new mock builder.
  *
  * Each value in `$types` can be either a class name, or an ad hoc mock

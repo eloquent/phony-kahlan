@@ -10,6 +10,14 @@ use Eloquent\Phony\Facade\AbstractFacade;
 class Phony extends AbstractFacade
 {
     /**
+     * Install Phony for Kahlan.
+     */
+    public static function install()
+    {
+        return static::driver()->install();
+    }
+
+    /**
      * Get the facade driver.
      *
      * @return FacadeDriver The facade driver.

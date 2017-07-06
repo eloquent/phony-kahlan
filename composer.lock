@@ -71,12 +71,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezzatron/kahlan.git",
-                "reference": "eb9fbfab1a989c2d215dccfb2133b51bd4fe6a80"
+                "reference": "d0dd2959903291377140afdb1be9d7b8c73b3394"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezzatron/kahlan/zipball/eb9fbfab1a989c2d215dccfb2133b51bd4fe6a80",
-                "reference": "eb9fbfab1a989c2d215dccfb2133b51bd4fe6a80",
+                "url": "https://api.github.com/repos/ezzatron/kahlan/zipball/d0dd2959903291377140afdb1be9d7b8c73b3394",
+                "reference": "d0dd2959903291377140afdb1be9d7b8c73b3394",
                 "shasum": ""
             },
             "require": {
@@ -129,7 +129,7 @@
             "support": {
                 "source": "https://github.com/ezzatron/kahlan/tree/phony"
             },
-            "time": "2017-07-06 01:06:05"
+            "time": "2017-07-06 04:24:20"
         }
     ],
     "packages-dev": [
