@@ -36,7 +36,7 @@ class AssertionRecorder implements PhonyAssertionRecorder
      */
     public function createSuccess(array $events = [])
     {
-        Suite::current()->expectExternal();
+        Suite::current()->expectExternal(['type' => AssertionException::class]);
 
         return new EventSequence($events, $this->callVerifierFactory);
     }
@@ -50,10 +50,7 @@ class AssertionRecorder implements PhonyAssertionRecorder
      */
     public function createSuccessFromEventCollection(EventCollection $events)
     {
-        Suite::current()->expectExternal([
-            'callback' => function () {},
-            'type' => AssertionException::class,
-        ]);
+        Suite::current()->expectExternal(['type' => AssertionException::class]);
 
         return $events;
     }
