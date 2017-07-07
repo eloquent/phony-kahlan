@@ -18,6 +18,14 @@ class Phony extends AbstractFacade
     }
 
     /**
+     * Uninstall Phony for Kahlan.
+     */
+    public static function uninstall()
+    {
+        return static::driver()->uninstall();
+    }
+
+    /**
      * Get the facade driver.
      *
      * @return FacadeDriver The facade driver.

@@ -44,9 +44,13 @@ class FacadeDriver extends PhonyFacadeDriver
      */
     public function install()
     {
+        if (null !== $this->aspect) {
+            return;
+        }
+
         $argumentFactory = $this->argumentFactory;
 
-        Filter::register(
+        $this->aspect = Filter::register(
             'phony.execute',
             function (Chain $chain) use ($argumentFactory) {
                 list($closure) = $chain->params();
@@ -61,6 +65,22 @@ class FacadeDriver extends PhonyFacadeDriver
         Filter::apply(Suite::class, 'executeClosure', 'phony.execute');
     }
 
+    /**
+     * Uninstall Phony for Kahlan.
+     */
+    public function uninstall()
+    {
+        if (null === $this->aspect) {
+            return;
+        }
+
+        Filter::detach(Group::class, 'executeClosure', 'phony.execute');
+        Filter::detach(Specification::class, 'executeClosure', 'phony.execute');
+        Filter::detach(Suite::class, 'executeClosure', 'phony.execute');
+        Filter::unregister('phony.execute');
+    }
+
     private static $instance;
     private $argumentFactory;
+    private $aspect;
 }

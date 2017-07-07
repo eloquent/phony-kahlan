@@ -10,15 +10,6 @@ use ReflectionFunction;
 class ArgumentFactory
 {
     /**
-     * Construct a new argument factory.
-     */
-    public function __construct()
-    {
-        $this->isScalarTypeHintSupported =
-            method_exists('ReflectionParameter', 'getType');
-    }
-
-    /**
      * Returns an argument list of test doubles for the supplied callback.
      *
      * @param callable $callback The callback.
@@ -38,21 +29,7 @@ class ArgumentFactory
                 continue;
             }
 
-            if ($this->isScalarTypeHintSupported) {
-                $typeName = strval($parameter->getType());
-                // @codeCoverageIgnoreStart
-            } elseif ($class = $parameter->getClass()) {
-                $typeName = $class->getName();
-            } elseif ($parameter->isArray()) {
-                $typeName = 'array';
-            } elseif ($parameter->isCallable()) {
-                $typeName = 'callable';
-            } else {
-                $arguments[] = null;
-
-                continue;
-            }
-            // @codeCoverageIgnoreEnd
+            $typeName = strval($parameter->getType());
 
             switch (strtolower($typeName)) {
                 case 'bool':
@@ -110,6 +87,4 @@ class ArgumentFactory
 
         return $arguments;
     }
-
-    private $isScalarTypeHintSupported;
 }
