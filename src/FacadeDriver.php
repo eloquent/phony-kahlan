@@ -30,13 +30,17 @@ class FacadeDriver extends PhonyFacadeDriver
 
     /**
      * Construct a new Kahlan facade driver.
+     *
+     * @param string $filterClass The Kahlan filter class to use.
      */
-    public function __construct()
+    public function __construct(string $filterClass = Filter::class)
     {
         parent::__construct(new AssertionRecorder());
 
-        $this->matcherFactory->addMatcherDriver(new ArgumentMatcherDriver());
+        $this->filterClass = $filterClass;
         $this->argumentFactory = new ArgumentFactory();
+
+        $this->matcherFactory->addMatcherDriver(new ArgumentMatcherDriver());
     }
 
     /**
@@ -48,9 +52,10 @@ class FacadeDriver extends PhonyFacadeDriver
             return;
         }
 
+        $filterClass = $this->filterClass;
         $argumentFactory = $this->argumentFactory;
 
-        $this->aspect = Filter::register(
+        $this->aspect = $filterClass::register(
             'phony.execute',
             function (Chain $chain) use ($argumentFactory) {
                 list($closure) = $chain->params();
@@ -60,9 +65,9 @@ class FacadeDriver extends PhonyFacadeDriver
             }
         );
 
-        Filter::apply(Group::class, 'executeClosure', 'phony.execute');
-        Filter::apply(Specification::class, 'executeClosure', 'phony.execute');
-        Filter::apply(Suite::class, 'executeClosure', 'phony.execute');
+        $filterClass::apply(Group::class, 'executeClosure', 'phony.execute');
+        $filterClass::apply(Specification::class, 'executeClosure', 'phony.execute');
+        $filterClass::apply(Suite::class, 'executeClosure', 'phony.execute');
     }
 
     /**
@@ -74,13 +79,17 @@ class FacadeDriver extends PhonyFacadeDriver
             return;
         }
 
-        Filter::detach(Group::class, 'executeClosure', 'phony.execute');
-        Filter::detach(Specification::class, 'executeClosure', 'phony.execute');
-        Filter::detach(Suite::class, 'executeClosure', 'phony.execute');
-        Filter::unregister('phony.execute');
+        $filterClass = $this->filterClass;
+
+        $filterClass::detach(Group::class, 'executeClosure', 'phony.execute');
+        $filterClass::detach(Specification::class, 'executeClosure', 'phony.execute');
+        $filterClass::detach(Suite::class, 'executeClosure', 'phony.execute');
+        $filterClass::unregister($this->aspect);
+        $this->aspect = null;
     }
 
     private static $instance;
+    private $filterClass;
     private $argumentFactory;
     private $aspect;
 }

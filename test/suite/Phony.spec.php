@@ -22,6 +22,52 @@ describe('Phony', function () {
         Phony::restoreGlobalFunctions();
     });
 
+    context('install()', function () {
+        it('should not fail catastrophically', function () {
+            expect(function () {
+                Phony::install();
+            })->not->toThrow();
+        });
+
+        it('should be able to be run after install()', function () {
+            expect(function () {
+                Phony::install();
+                Phony::install();
+            })->not->toThrow();
+        });
+
+        it('should be able to be run after uninstall()', function () {
+            expect(function () {
+                Phony::install();
+                Phony::uninstall();
+                Phony::install();
+            })->not->toThrow();
+        });
+    });
+
+    context('uninstall()', function () {
+        it('should not fail catastrophically', function () {
+            expect(function () {
+                Phony::install();
+                Phony::uninstall();
+            })->not->toThrow();
+        });
+
+        it('should be able to be run after uninstall()', function () {
+            expect(function () {
+                Phony::install();
+                Phony::uninstall();
+                Phony::uninstall();
+            })->not->toThrow();
+        });
+
+        it('should be able to be run before install()', function () {
+            expect(function () {
+                Phony::uninstall();
+            })->not->toThrow();
+        });
+    });
+
     context('mockBuilder()', function () {
         it('should produce a working mock builder', function () {
             $builder = Phony::mockBuilder(TestClassA::class);

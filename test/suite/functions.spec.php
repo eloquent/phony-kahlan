@@ -22,6 +22,52 @@ describe('Phony', function () {
         restoreGlobalFunctions();
     });
 
+    context('install()', function () {
+        it('should not fail catastrophically', function () {
+            expect(function () {
+                install();
+            })->not->toThrow();
+        });
+
+        it('should be able to be run after install()', function () {
+            expect(function () {
+                install();
+                install();
+            })->not->toThrow();
+        });
+
+        it('should be able to be run after uninstall()', function () {
+            expect(function () {
+                install();
+                uninstall();
+                install();
+            })->not->toThrow();
+        });
+    });
+
+    context('uninstall()', function () {
+        it('should not fail catastrophically', function () {
+            expect(function () {
+                install();
+                uninstall();
+            })->not->toThrow();
+        });
+
+        it('should be able to be run after uninstall()', function () {
+            expect(function () {
+                install();
+                uninstall();
+                uninstall();
+            })->not->toThrow();
+        });
+
+        it('should be able to be run before install()', function () {
+            expect(function () {
+                uninstall();
+            })->not->toThrow();
+        });
+    });
+
     context('mockBuilder()', function () {
         it('should produce a working mock builder', function () {
             $builder = mockBuilder(TestClassA::class);
