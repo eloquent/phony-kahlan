@@ -243,25 +243,6 @@ describe('Phony', function () {
             });
         });
 
-        context('checkInOrderSequence()', function () {
-            it('should return truthy when the events are in order', function () {
-                expect(checkInOrderSequence([$this->eventA, $this->eventB]))->toBeTruthy();
-            });
-
-            it('should return falsey when the events are out of order', function () {
-                expect(checkInOrderSequence([$this->eventB, $this->eventA]))->toBeFalsy();
-            });
-        });
-
-        context('inOrderSequence()', function () {
-            it('should return a verification result when the events are in order', function () {
-                $result = inOrderSequence([$this->eventA, $this->eventB]);
-
-                expect($result)->toBeAnInstanceOf(EventSequence::class);
-                expect($result->allEvents())->toBe([$this->eventA, $this->eventB]);
-            });
-        });
-
         context('checkAnyOrder()', function () {
             it('should return truthy when events are supplied', function () {
                 expect(checkAnyOrder($this->eventA, $this->eventB))->toBeTruthy();
@@ -275,25 +256,6 @@ describe('Phony', function () {
         context('anyOrder()', function () {
             it('should return a verification result when events are supplied', function () {
                 $result = anyOrder($this->eventA, $this->eventB);
-
-                expect($result)->toBeAnInstanceOf(EventSequence::class);
-                expect($result->allEvents())->toBe([$this->eventA, $this->eventB]);
-            });
-        });
-
-        context('checkAnyOrderSequence()', function () {
-            it('should return truthy when events are supplied', function () {
-                expect(checkAnyOrderSequence([$this->eventA, $this->eventB]))->toBeTruthy();
-            });
-
-            it('should return falsey when no events are supplied', function () {
-                expect(checkAnyOrderSequence([]))->toBeFalsy();
-            });
-        });
-
-        context('anyOrderSequence()', function () {
-            it('should return a verification result when events are supplied', function () {
-                $result = anyOrderSequence([$this->eventA, $this->eventB]);
 
                 expect($result)->toBeAnInstanceOf(EventSequence::class);
                 expect($result->allEvents())->toBe([$this->eventA, $this->eventB]);

@@ -17,6 +17,14 @@ use Kahlan\Suite;
 class AssertionRecorder implements PhonyAssertionRecorder
 {
     /**
+     * Construct a new assertion recorder.
+     */
+    public function __construct(string $suiteClass = Suite::class)
+    {
+        $this->suiteClass = $suiteClass;
+    }
+
+    /**
      * Set the call verifier factory.
      *
      * @param CallVerifierFactory $callVerifierFactory The call verifier factory to use.
@@ -36,7 +44,8 @@ class AssertionRecorder implements PhonyAssertionRecorder
      */
     public function createSuccess(array $events = [])
     {
-        Suite::current()->expectExternal(['type' => AssertionException::class]);
+        $suiteClass = $this->suiteClass;
+        $suiteClass::current()->expectExternal(['type' => AssertionException::class]);
 
         return new EventSequence($events, $this->callVerifierFactory);
     }
@@ -50,7 +59,8 @@ class AssertionRecorder implements PhonyAssertionRecorder
      */
     public function createSuccessFromEventCollection(EventCollection $events)
     {
-        Suite::current()->expectExternal(['type' => AssertionException::class]);
+        $suiteClass = $this->suiteClass;
+        $suiteClass::current()->expectExternal(['type' => AssertionException::class]);
 
         return $events;
     }
@@ -66,7 +76,8 @@ class AssertionRecorder implements PhonyAssertionRecorder
     {
         $exception = new AssertionException($description);
 
-        Suite::current()->expectExternal([
+        $suiteClass = $this->suiteClass;
+        $suiteClass::current()->expectExternal([
             'callback' => function () use ($exception) {
                 throw $exception;
             },
@@ -74,5 +85,6 @@ class AssertionRecorder implements PhonyAssertionRecorder
         ]);
     }
 
+    private $suiteClass;
     private $callVerifierFactory;
 }

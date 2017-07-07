@@ -129,7 +129,7 @@ function onStatic($class)
  *
  * @return SpyVerifier The new spy.
  */
-function spy($callback = null)
+function spy(callable $callback = null)
 {
     return FacadeDriver::instance()->spyVerifierFactory
         ->createFromCallback($callback);
@@ -144,7 +144,7 @@ function spy($callback = null)
  *
  * @return SpyVerifier The new spy.
  */
-function spyGlobal($function, $namespace)
+function spyGlobal(string $function, string $namespace)
 {
     return FacadeDriver::instance()->spyVerifierFactory
         ->createGlobal($function, $namespace);
@@ -157,7 +157,7 @@ function spyGlobal($function, $namespace)
  *
  * @return StubVerifier The new stub.
  */
-function stub($callback = null)
+function stub(callable $callback = null)
 {
     return FacadeDriver::instance()->stubVerifierFactory
         ->createFromCallback($callback);
@@ -175,7 +175,7 @@ function stub($callback = null)
  *
  * @return StubVerifier The new stub.
  */
-function stubGlobal($function, $namespace)
+function stubGlobal(string $function, string $namespace)
 {
     return FacadeDriver::instance()->stubVerifierFactory
         ->createGlobal($function, $namespace);
@@ -220,34 +220,6 @@ function inOrder()
 }
 
 /**
- * Checks if the supplied event sequence happened in chronological order.
- *
- * @param mixed<Event|EventCollection> $events The event sequence.
- *
- * @return EventCollection|null The result.
- */
-function checkInOrderSequence($events)
-{
-    return FacadeDriver::instance()->eventOrderVerifier
-        ->checkInOrderSequence($events);
-}
-
-/**
- * Throws an exception unless the supplied event sequence happened in
- * chronological order.
- *
- * @param mixed<Event|EventCollection> $events The event sequence.
- *
- * @return EventCollection The result.
- * @throws Exception       If the assertion fails, and the assertion recorder throws exceptions.
- */
-function inOrderSequence($events)
-{
-    return FacadeDriver::instance()->eventOrderVerifier
-        ->inOrderSequence($events);
-}
-
-/**
  * Checks that at least one event is supplied.
  *
  * @param Event|EventCollection ...$events The events.
@@ -274,36 +246,6 @@ function anyOrder()
 {
     return FacadeDriver::instance()->eventOrderVerifier
         ->anyOrderSequence(func_get_args());
-}
-
-/**
- * Checks if the supplied event sequence contains at least one event.
- *
- * @param mixed<Event|EventCollection> $events The event sequence.
- *
- * @return EventCollection|null     The result.
- * @throws InvalidArgumentException If invalid input is supplied.
- */
-function checkAnyOrderSequence($events)
-{
-    return FacadeDriver::instance()->eventOrderVerifier
-        ->checkAnyOrderSequence($events);
-}
-
-/**
- * Throws an exception unless the supplied event sequence contains at least
- * one event.
- *
- * @param mixed<Event|EventCollection> $events The event sequence.
- *
- * @return EventCollection          The result.
- * @throws InvalidArgumentException If invalid input is supplied.
- * @throws Exception                If the assertion fails, and the assertion recorder throws exceptions.
- */
-function anyOrderSequence($events)
-{
-    return FacadeDriver::instance()->eventOrderVerifier
-        ->anyOrderSequence($events);
 }
 
 /**
@@ -339,8 +281,8 @@ function equalTo($value)
  */
 function wildcard(
     $value = null,
-    $minimumArguments = 0,
-    $maximumArguments = null
+    int $minimumArguments = 0,
+    int $maximumArguments = null
 ) {
     return FacadeDriver::instance()->matcherFactory
         ->wildcard($value, $minimumArguments, $maximumArguments);
@@ -355,7 +297,7 @@ function wildcard(
  *
  * @return int The previous depth.
  */
-function setExportDepth($depth)
+function setExportDepth(int $depth)
 {
     return FacadeDriver::instance()->exporter->setDepth($depth);
 }

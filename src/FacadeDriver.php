@@ -30,8 +30,6 @@ class FacadeDriver extends PhonyFacadeDriver
 
     /**
      * Construct a new Kahlan facade driver.
-     *
-     * @param string $filterClass The Kahlan filter class to use.
      */
     public function __construct(string $filterClass = Filter::class)
     {
