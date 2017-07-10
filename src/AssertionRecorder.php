@@ -22,6 +22,10 @@ class AssertionRecorder implements PhonyAssertionRecorder
     public function __construct(string $suiteClass = Suite::class)
     {
         $this->suiteClass = $suiteClass;
+        $this->successConfig = [
+            'handler' => function () {},
+            'type' => AssertionException::class,
+        ];
     }
 
     /**
@@ -45,7 +49,7 @@ class AssertionRecorder implements PhonyAssertionRecorder
     public function createSuccess(array $events = [])
     {
         $suiteClass = $this->suiteClass;
-        $suiteClass::current()->expectExternal(['type' => AssertionException::class]);
+        $suiteClass::current()->assert($this->successConfig);
 
         return new EventSequence($events, $this->callVerifierFactory);
     }
@@ -60,7 +64,7 @@ class AssertionRecorder implements PhonyAssertionRecorder
     public function createSuccessFromEventCollection(EventCollection $events)
     {
         $suiteClass = $this->suiteClass;
-        $suiteClass::current()->expectExternal(['type' => AssertionException::class]);
+        $suiteClass::current()->assert($this->successConfig);
 
         return $events;
     }
@@ -77,8 +81,8 @@ class AssertionRecorder implements PhonyAssertionRecorder
         $exception = new AssertionException($description);
 
         $suiteClass = $this->suiteClass;
-        $suiteClass::current()->expectExternal([
-            'callback' => function () use ($exception) {
+        $suiteClass::current()->assert([
+            'handler' => function () use ($exception) {
                 throw $exception;
             },
             'type' => AssertionException::class,
@@ -86,5 +90,6 @@ class AssertionRecorder implements PhonyAssertionRecorder
     }
 
     private $suiteClass;
+    private $successConfig;
     private $callVerifierFactory;
 }

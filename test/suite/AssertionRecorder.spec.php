@@ -35,7 +35,21 @@ describe('AssertionRecorder', function () {
         });
 
         it('should have recorded the verification with Kahlan', function () {
-            $this->scope->expectExternal->calledWith(['type' => AssertionException::class]);
+            $config = $this->scope->assert->calledWith(Arg::toBeAn('array'))->firstCall()->argument();
+
+            expect($config['type'])->toBe(AssertionException::class);
+            expect($config['handler'])->toBeAnInstanceOf(Closure::class);
+        });
+
+        context('assert handler', function () {
+            beforeEach(function () {
+                $config = $this->scope->assert->calledWith(Arg::toBeAn('array'))->firstCall()->argument();
+                $this->handler = $config['handler'];
+            });
+
+            it('should not throw an exception', function () {
+                expect($this->handler)->not->toThrow();
+            });
         });
     });
 
@@ -51,7 +65,21 @@ describe('AssertionRecorder', function () {
         });
 
         it('should have recorded the verification with Kahlan', function () {
-            $this->scope->expectExternal->calledWith(['type' => AssertionException::class]);
+            $config = $this->scope->assert->calledWith(Arg::toBeAn('array'))->firstCall()->argument();
+
+            expect($config['type'])->toBe(AssertionException::class);
+            expect($config['handler'])->toBeAnInstanceOf(Closure::class);
+        });
+
+        context('assert handler', function () {
+            beforeEach(function () {
+                $config = $this->scope->assert->calledWith(Arg::toBeAn('array'))->firstCall()->argument();
+                $this->handler = $config['handler'];
+            });
+
+            it('should not throw an exception', function () {
+                expect($this->handler)->not->toThrow();
+            });
         });
     });
 
@@ -61,20 +89,20 @@ describe('AssertionRecorder', function () {
         });
 
         it('should have recorded the verification with Kahlan', function () {
-            $config = $this->scope->expectExternal->calledWith(Arg::toBeAn('array'))->firstCall()->argument();
+            $config = $this->scope->assert->calledWith(Arg::toBeAn('array'))->firstCall()->argument();
 
             expect($config['type'])->toBe(AssertionException::class);
-            expect($config['callback'])->toBeAnInstanceOf(Closure::class);
+            expect($config['handler'])->toBeAnInstanceOf(Closure::class);
         });
 
-        context('expectation callback', function () {
+        context('assert handler', function () {
             beforeEach(function () {
-                $config = $this->scope->expectExternal->calledWith(Arg::toBeAn('array'))->firstCall()->argument();
-                $this->callback = $config['callback'];
+                $config = $this->scope->assert->calledWith(Arg::toBeAn('array'))->firstCall()->argument();
+                $this->handler = $config['handler'];
             });
 
             it('should throw an assertion exception', function () {
-                expect($this->callback)->toThrow(new AssertionException('You done goofed.'));
+                expect($this->handler)->toThrow(new AssertionException('You done goofed.'));
             });
         });
     });
