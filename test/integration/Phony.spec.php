@@ -1,31 +1,13 @@
 <?php
 
 use Eloquent\Phony\Kahlan\Test\TestClassA;
-use Eloquent\Phony\Mock\Mock;
-use Eloquent\Phony\Stub\StubVerifier;
 use Kahlan\Arg;
-use function Eloquent\Phony\Kahlan\on;
+use function Eloquent\Phony\Kahlan\mock;
 
-describe('Phony', function (DateTime $dateTime) {
-    beforeEach(function (TestClassA $mock) {
-        $this->mock = $mock;
-        $this->handle = on($mock);
-    });
-
-    it('should support auto-injected mocks', function (DateTime $dateTime) {
-        expect($dateTime)->toBeAnInstanceOf(Mock::class);
-    });
-
-    it('should support auto-injected mocks in describe blocks', function () use ($dateTime) {
-        expect($dateTime)->toBeAnInstanceOf(Mock::class);
-    });
-
-    it('should support auto-injected stubs', function (callable $stub) {
-        expect($stub)->toBeAnInstanceOf(StubVerifier::class);
-    });
-
-    it('should support auto-injected scalar values', function (string $string) {
-        expect($string)->toBe('');
+describe('Phony', function () {
+    beforeEach(function () {
+        $this->handle = mock(TestClassA::class);
+        $this->mock = $this->handle->get();
     });
 
     it('should record passing mock assertions', function () {
