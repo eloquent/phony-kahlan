@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f5cd9f3bc419d4287c8d7235f6d91e7",
+    "content-hash": "78dc8699aac016268d931ebc03b30470",
     "packages": [
         {
             "name": "eloquent/phony",
@@ -123,16 +123,16 @@
     "packages-dev": [
         {
             "name": "errors/exceptions",
-            "version": "0.1.1",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-errors/exceptions.git",
-                "reference": "3e487e8b7b8723afa8d3985534d12b5273b71d97"
+                "reference": "8115762ac206196d355f644de4b4623fa81d27f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-errors/exceptions/zipball/3e487e8b7b8723afa8d3985534d12b5273b71d97",
-                "reference": "3e487e8b7b8723afa8d3985534d12b5273b71d97",
+                "url": "https://api.github.com/repos/php-errors/exceptions/zipball/8115762ac206196d355f644de4b4623fa81d27f2",
+                "reference": "8115762ac206196d355f644de4b4623fa81d27f2",
                 "shasum": ""
             },
             "conflict": {
@@ -167,7 +167,7 @@
                 "exception",
                 "handler"
             ],
-            "time": "2016-12-12T23:18:54+00:00"
+            "time": "2017-07-03T23:04:46+00:00"
         }
     ],
     "aliases": [],

@@ -1,5 +1,5 @@
 # Phony for Kahlan changelog
 
-## Next release
+## 0.1.0 (2017-07-13)
 
 - **[NEW]** Initial release.

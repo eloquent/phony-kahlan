@@ -17,7 +17,7 @@
         "kahlan/kahlan": "dev-4.0-phony"
     },
     "require-dev": {
-        "errors/exceptions": "^0.1"
+        "errors/exceptions": "^0.2"
     },
     "autoload": {
         "psr-4": {
