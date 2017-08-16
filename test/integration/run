@@ -6,4 +6,4 @@ echo Kahlan
 echo ===========================================================================
 echo
 
-vendor/bin/kahlan --spec=test/integration
+vendor/bin/kahlan --config=test/integration/kahlan-config.php --spec=test/integration
