@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "78dc8699aac016268d931ebc03b30470",
+    "content-hash": "09beccc5de434022db08d376bd90b95e",
     "packages": [
         {
             "name": "eloquent/phony",
@@ -67,20 +67,20 @@
         },
         {
             "name": "kahlan/kahlan",
-            "version": "dev-4.0-phony",
+            "version": "4.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kahlan/kahlan.git",
-                "reference": "a1b1997bc4ea97a9f46a4bda85fc06601d7c54c8"
+                "reference": "6d27486a70c02f2c1e9428bddf8233fe4d41843e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/a1b1997bc4ea97a9f46a4bda85fc06601d7c54c8",
-                "reference": "a1b1997bc4ea97a9f46a4bda85fc06601d7c54c8",
+                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/6d27486a70c02f2c1e9428bddf8233fe4d41843e",
+                "reference": "6d27486a70c02f2c1e9428bddf8233fe4d41843e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4"
+                "php": ">=5.5"
             },
             "require-dev": {
                 "squizlabs/php_codesniffer": "^2.7"
@@ -117,7 +117,7 @@
                 "testing",
                 "unit test"
             ],
-            "time": "2017-07-07 01:55:52"
+            "time": "2017-08-13T00:46:32+00:00"
         }
     ],
     "packages-dev": [

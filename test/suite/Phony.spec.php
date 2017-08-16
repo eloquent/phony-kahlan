@@ -17,7 +17,7 @@ use Eloquent\Phony\Mock\Mock;
 use Eloquent\Phony\Spy\SpyVerifier;
 use Eloquent\Phony\Stub\StubVerifier;
 
-describe('Phony', function () {
+describe('Phony facade', function () {
     afterEach(function () {
         Phony::restoreGlobalFunctions();
     });
