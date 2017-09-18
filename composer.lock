@@ -4,31 +4,31 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "09beccc5de434022db08d376bd90b95e",
+    "content-hash": "5ac7e04c070b3882dd5387a61aecb889",
     "packages": [
         {
             "name": "eloquent/phony",
-            "version": "1.0.1",
+            "version": "dev-php72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eloquent/phony.git",
-                "reference": "bff87a1c7c302a05d29b0aa2149bed8fc9f7627b"
+                "reference": "7c1503269617041a4ba52121aa5546633bd7547c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eloquent/phony/zipball/bff87a1c7c302a05d29b0aa2149bed8fc9f7627b",
-                "reference": "bff87a1c7c302a05d29b0aa2149bed8fc9f7627b",
+                "url": "https://api.github.com/repos/eloquent/phony/zipball/7c1503269617041a4ba52121aa5546633bd7547c",
+                "reference": "7c1503269617041a4ba52121aa5546633bd7547c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "php": ">=7"
             },
             "require-dev": {
                 "errors/exceptions": "^0.2",
                 "ext-pdo": "*",
                 "hamcrest/hamcrest-php": "^2",
                 "icecave/semver": "^3",
-                "phpunit/phpunit": "^4"
+                "phpunit/phpunit": "^6"
             },
             "type": "library",
             "autoload": {
@@ -63,7 +63,7 @@
                 "stubbing",
                 "test"
             ],
-            "time": "2017-07-04T01:10:30+00:00"
+            "time": "2017-09-18T11:25:40+00:00"
         },
         {
             "name": "kahlan/kahlan",
@@ -173,6 +173,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "eloquent/phony": 20,
         "kahlan/kahlan": 20
     },
     "prefer-stable": false,

@@ -46,7 +46,7 @@ function uninstall()
  *
  * @return MockBuilder The mock builder.
  */
-function mockBuilder($types = [])
+function mockBuilder($types = []): MockBuilder
 {
     return FacadeDriver::instance()->mockBuilderFactory->create($types);
 }
@@ -62,7 +62,7 @@ function mockBuilder($types = [])
  *
  * @return InstanceHandle A handle around the new mock.
  */
-function mock($types = [])
+function mock($types = []): InstanceHandle
 {
     $driver = FacadeDriver::instance();
 
@@ -87,7 +87,7 @@ function mock($types = [])
  *
  * @return InstanceHandle A handle around the new mock.
  */
-function partialMock($types = [], $arguments = [])
+function partialMock($types = [], $arguments = []): InstanceHandle
 {
     $driver = FacadeDriver::instance();
 
@@ -104,7 +104,7 @@ function partialMock($types = [], $arguments = [])
  * @return InstanceHandle The newly created handle.
  * @throws MockException  If the supplied mock is invalid.
  */
-function on($mock)
+function on($mock): InstanceHandle
 {
     return FacadeDriver::instance()->handleFactory->instanceHandle($mock);
 }
@@ -112,12 +112,12 @@ function on($mock)
 /**
  * Create a new static handle.
  *
- * @param Handle|ReflectionClass|object|string $class The class.
+ * @param Mock|Handle|ReflectionClass|string $class The class.
  *
  * @return StaticHandle  The newly created handle.
  * @throws MockException If the supplied class name is not a mock class.
  */
-function onStatic($class)
+function onStatic($class): StaticHandle
 {
     return FacadeDriver::instance()->handleFactory->staticHandle($class);
 }
@@ -129,7 +129,7 @@ function onStatic($class)
  *
  * @return SpyVerifier The new spy.
  */
-function spy(callable $callback = null)
+function spy(callable $callback = null): SpyVerifier
 {
     return FacadeDriver::instance()->spyVerifierFactory
         ->createFromCallback($callback);
@@ -144,7 +144,7 @@ function spy(callable $callback = null)
  *
  * @return SpyVerifier The new spy.
  */
-function spyGlobal(string $function, string $namespace)
+function spyGlobal(string $function, string $namespace): SpyVerifier
 {
     return FacadeDriver::instance()->spyVerifierFactory
         ->createGlobal($function, $namespace);
@@ -157,7 +157,7 @@ function spyGlobal(string $function, string $namespace)
  *
  * @return StubVerifier The new stub.
  */
-function stub(callable $callback = null)
+function stub(callable $callback = null): StubVerifier
 {
     return FacadeDriver::instance()->stubVerifierFactory
         ->createFromCallback($callback);
@@ -175,7 +175,7 @@ function stub(callable $callback = null)
  *
  * @return StubVerifier The new stub.
  */
-function stubGlobal(string $function, string $namespace)
+function stubGlobal(string $function, string $namespace): StubVerifier
 {
     return FacadeDriver::instance()->stubVerifierFactory
         ->createGlobal($function, $namespace);
@@ -198,10 +198,10 @@ function restoreGlobalFunctions()
  *
  * @return EventCollection|null The result.
  */
-function checkInOrder()
+function checkInOrder(...$events)
 {
     return FacadeDriver::instance()->eventOrderVerifier
-        ->checkInOrderSequence(func_get_args());
+        ->checkInOrder(...$events);
 }
 
 /**
@@ -211,12 +211,11 @@ function checkInOrder()
  * @param Event|EventCollection ...$events The events.
  *
  * @return EventCollection The result.
- * @throws Exception       If the assertion fails, and the assertion recorder throws exceptions.
+ * @throws Throwable       If the assertion fails, and the assertion recorder throws exceptions.
  */
-function inOrder()
+function inOrder(...$events): EventCollection
 {
-    return FacadeDriver::instance()->eventOrderVerifier
-        ->inOrderSequence(func_get_args());
+    return FacadeDriver::instance()->eventOrderVerifier->inOrder(...$events);
 }
 
 /**
@@ -227,10 +226,10 @@ function inOrder()
  * @return EventCollection|null     The result.
  * @throws InvalidArgumentException If invalid input is supplied.
  */
-function checkAnyOrder()
+function checkAnyOrder(...$events)
 {
     return FacadeDriver::instance()->eventOrderVerifier
-        ->checkAnyOrderSequence(func_get_args());
+        ->checkAnyOrder(...$events);
 }
 
 /**
@@ -240,12 +239,11 @@ function checkAnyOrder()
  *
  * @return EventCollection          The result.
  * @throws InvalidArgumentException If invalid input is supplied.
- * @throws Exception                If the assertion fails, and the assertion recorder throws exceptions.
+ * @throws Throwable                If the assertion fails, and the assertion recorder throws exceptions.
  */
-function anyOrder()
+function anyOrder(...$events): EventCollection
 {
-    return FacadeDriver::instance()->eventOrderVerifier
-        ->anyOrderSequence(func_get_args());
+    return FacadeDriver::instance()->eventOrderVerifier->anyOrder(...$events);
 }
 
 /**
@@ -253,7 +251,7 @@ function anyOrder()
  *
  * @return Matcher The newly created matcher.
  */
-function any()
+function any(): Matcher
 {
     return FacadeDriver::instance()->matcherFactory->any();
 }
@@ -265,7 +263,7 @@ function any()
  *
  * @return Matcher The newly created matcher.
  */
-function equalTo($value)
+function equalTo($value): Matcher
 {
     return FacadeDriver::instance()->matcherFactory->equalTo($value, false);
 }
@@ -273,17 +271,19 @@ function equalTo($value)
 /**
  * Create a new matcher that matches multiple arguments.
  *
- * @param mixed    $value            The value to check for each argument.
- * @param int      $minimumArguments The minimum number of arguments.
- * @param int|null $maximumArguments The maximum number of arguments.
+ * Negative values for $maximumArguments are treated as "no maximum".
+ *
+ * @param mixed $value            The value to check for each argument.
+ * @param int   $minimumArguments The minimum number of arguments.
+ * @param int   $maximumArguments The maximum number of arguments.
  *
  * @return WildcardMatcher The newly created wildcard matcher.
  */
 function wildcard(
     $value = null,
     int $minimumArguments = 0,
-    int $maximumArguments = null
-) {
+    int $maximumArguments = -1
+): WildcardMatcher {
     return FacadeDriver::instance()->matcherFactory
         ->wildcard($value, $minimumArguments, $maximumArguments);
 }
@@ -297,7 +297,7 @@ function wildcard(
  *
  * @return int The previous depth.
  */
-function setExportDepth(int $depth)
+function setExportDepth(int $depth): int
 {
     return FacadeDriver::instance()->exporter->setDepth($depth);
 }
@@ -309,7 +309,7 @@ function setExportDepth(int $depth)
  *
  * @param bool|null $useColor True to use color.
  */
-function setUseColor($useColor)
+function setUseColor(bool $useColor = null)
 {
     $facade = FacadeDriver::instance();
 

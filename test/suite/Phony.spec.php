@@ -4,6 +4,7 @@ namespace Eloquent\Phony\Kahlan;
 
 use Countable;
 use Eloquent\Phony\Event\EventSequence;
+use Eloquent\Phony\Kahlan\Facade as TestNamespace;
 use Eloquent\Phony\Kahlan\Test\TestClassA;
 use Eloquent\Phony\Kahlan\Test\TestClassB;
 use Eloquent\Phony\Kahlan\Test\TestEvent;
@@ -173,10 +174,10 @@ describe('Phony facade', function () {
 
     context('spyGlobal()', function () {
         it('should produce a working global spy', function () {
-            $spy = Phony::spyGlobal('sprintf', 'Eloquent\Phony\Facade');
+            $spy = Phony::spyGlobal('sprintf', TestNamespace::class);
 
             expect($spy)->toBeAnInstanceOf(SpyVerifier::class);
-            expect(\Eloquent\Phony\Facade\sprintf('%s, %s', 'a', 'b'))->toBe('a, b');
+            expect(TestNamespace\sprintf('%s, %s', 'a', 'b'))->toBe('a, b');
             expect($spy->calledWith('%s, %s', 'a', 'b'))->toBeTruthy();
         });
     });
@@ -195,26 +196,26 @@ describe('Phony facade', function () {
 
     context('spyGlobal()', function () {
         it('should produce a working global stub', function () {
-            $stub = Phony::stubGlobal('sprintf', 'Eloquent\Phony\Facade')->returns('x');
+            $stub = Phony::stubGlobal('sprintf', TestNamespace::class)->returns('x');
 
             expect($stub)->toBeAnInstanceOf(StubVerifier::class);
-            expect(\Eloquent\Phony\Facade\sprintf('%s, %s', 'a', 'b'))->toBe('x');
+            expect(TestNamespace\sprintf('%s, %s', 'a', 'b'))->toBe('x');
             expect($stub->calledWith('%s, %s', 'a', 'b'))->toBeTruthy();
         });
     });
 
     context('restoreGlobalFunctions()', function () {
         it('should restore global functions that have been stubbed', function () {
-            Phony::stubGlobal('sprintf', 'Eloquent\Phony\Facade');
-            Phony::stubGlobal('vsprintf', 'Eloquent\Phony\Facade');
+            Phony::stubGlobal('sprintf', TestNamespace::class);
+            Phony::stubGlobal('vsprintf', TestNamespace::class);
 
-            expect(\Eloquent\Phony\Facade\sprintf('%s, %s', 'a', 'b'))->toBe(null);
-            expect(\Eloquent\Phony\Facade\vsprintf('%s, %s', ['a', 'b']))->toBe(null);
+            expect(TestNamespace\sprintf('%s, %s', 'a', 'b'))->toBe(null);
+            expect(TestNamespace\vsprintf('%s, %s', ['a', 'b']))->toBe(null);
 
             Phony::restoreGlobalFunctions();
 
-            expect(\Eloquent\Phony\Facade\sprintf('%s, %s', 'a', 'b'))->toBe('a, b');
-            expect(\Eloquent\Phony\Facade\vsprintf('%s, %s', ['a', 'b']))->toBe('a, b');
+            expect(TestNamespace\sprintf('%s, %s', 'a', 'b'))->toBe('a, b');
+            expect(TestNamespace\vsprintf('%s, %s', ['a', 'b']))->toBe('a, b');
         });
     });
 
@@ -243,25 +244,6 @@ describe('Phony facade', function () {
             });
         });
 
-        context('checkInOrderSequence()', function () {
-            it('should return truthy when the events are in order', function () {
-                expect(Phony::checkInOrderSequence([$this->eventA, $this->eventB]))->toBeTruthy();
-            });
-
-            it('should return falsey when the events are out of order', function () {
-                expect(Phony::checkInOrderSequence([$this->eventB, $this->eventA]))->toBeFalsy();
-            });
-        });
-
-        context('inOrderSequence()', function () {
-            it('should return a verification result when the events are in order', function () {
-                $result = Phony::inOrderSequence([$this->eventA, $this->eventB]);
-
-                expect($result)->toBeAnInstanceOf(EventSequence::class);
-                expect($result->allEvents())->toBe([$this->eventA, $this->eventB]);
-            });
-        });
-
         context('checkAnyOrder()', function () {
             it('should return truthy when events are supplied', function () {
                 expect(Phony::checkAnyOrder($this->eventA, $this->eventB))->toBeTruthy();
@@ -275,25 +257,6 @@ describe('Phony facade', function () {
         context('anyOrder()', function () {
             it('should return a verification result when events are supplied', function () {
                 $result = Phony::anyOrder($this->eventA, $this->eventB);
-
-                expect($result)->toBeAnInstanceOf(EventSequence::class);
-                expect($result->allEvents())->toBe([$this->eventA, $this->eventB]);
-            });
-        });
-
-        context('checkAnyOrderSequence()', function () {
-            it('should return truthy when events are supplied', function () {
-                expect(Phony::checkAnyOrderSequence([$this->eventA, $this->eventB]))->toBeTruthy();
-            });
-
-            it('should return falsey when no events are supplied', function () {
-                expect(Phony::checkAnyOrderSequence([]))->toBeFalsy();
-            });
-        });
-
-        context('anyOrderSequence()', function () {
-            it('should return a verification result when events are supplied', function () {
-                $result = Phony::anyOrderSequence([$this->eventA, $this->eventB]);
 
                 expect($result)->toBeAnInstanceOf(EventSequence::class);
                 expect($result->allEvents())->toBe([$this->eventA, $this->eventB]);
@@ -335,7 +298,7 @@ describe('Phony facade', function () {
                 expect($matcher)->toBeAnInstanceOf(WildcardMatcher::class);
                 expect($matcher->matcher())->toBeAnInstanceOf(AnyMatcher::class);
                 expect($matcher->minimumArguments())->toBe(0);
-                expect($matcher->maximumArguments())->toBe(null);
+                expect($matcher->maximumArguments())->toBe(-1);
             });
         });
     });

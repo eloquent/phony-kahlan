@@ -2,13 +2,15 @@
 
 namespace Eloquent\Phony\Kahlan;
 
-use Eloquent\Phony\Facade\AbstractFacade;
+use Eloquent\Phony\Facade\FacadeTrait;
 
 /**
  * A facade for Phony usage under Kahlan.
  */
-class Phony extends AbstractFacade
+class Phony
 {
+    use FacadeTrait;
+
     /**
      * Install Phony for Kahlan.
      */
@@ -25,13 +27,10 @@ class Phony extends AbstractFacade
         return static::driver()->uninstall();
     }
 
-    /**
-     * Get the facade driver.
-     *
-     * @return FacadeDriver The facade driver.
-     */
-    protected static function driver()
+    private static function driver()
     {
-        return FacadeDriver::instance();
+        return self::$driver ?? self::$driver = FacadeDriver::instance();
     }
+
+    private static $driver;
 }

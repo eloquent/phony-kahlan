@@ -7,14 +7,24 @@ use Eloquent\Phony\Kahlan\Test\TestClassA;
 use Eloquent\Phony\Mock\Mock;
 use Eloquent\Phony\Stub\StubVerifier;
 use Generator;
+use ReflectionException;
+use ReflectionFunction;
 use stdClass;
 
-describe('ArgumentFactory', function () {
+try {
+    $function = new ReflectionFunction(function (iterable $a) {});
+    $parameters = $function->getParameters();
+    $isIterableTypeSupported = null === $parameters[0]->getClass();
+} catch (ReflectionException $e) {
+    $isIterableTypeSupported = false;
+}
+
+describe('ArgumentFactory', function () use ($isIterableTypeSupported) {
     beforeEach(function () {
         $this->subject = new ArgumentFactory();
     });
 
-    context('argumentsForCallback()', function () {
+    context('argumentsForCallback()', function () use ($isIterableTypeSupported) {
         it('should should return arguments for each parameter', function () {
             $callback = function (string $a, int $b) {};
 
@@ -57,6 +67,32 @@ describe('ArgumentFactory', function () {
             expect($this->subject->argumentsForCallback($callback))->toBe([[]]);
         });
 
+        it('should support iterable parameters', function () use ($isIterableTypeSupported) {
+            skipIf(!$isIterableTypeSupported);
+
+            $callback = function (iterable $a) {};
+
+            expect($this->subject->argumentsForCallback($callback))->toBe([[]]);
+        });
+
+        it('should support object parameters', function () {
+            skipIf(version_compare(PHP_VERSION, '7.2.x', '<'));
+
+            $callback = function (object $a) {};
+
+            expect($this->subject->argumentsForCallback($callback))->toEqual([(object) []]);
+        });
+
+        it('should support object parameters before PHP 7.2', function () {
+            skipIf(version_compare(PHP_VERSION, '7.2.x', '>='));
+
+            $callback = eval('return function (object $a) {};');
+
+            $actual = $this->subject->argumentsForCallback($callback);
+            expect($actual[0])->toBeAnInstanceOf('object');
+            expect($actual[0])->toBeAnInstanceOf(Mock::class);
+        });
+
         it('should support stdClass parameters', function () {
             $callback = function (stdClass $a) {};
 
@@ -88,7 +124,7 @@ describe('ArgumentFactory', function () {
             expect(iterator_to_array($actual[0]))->toBe([]);
         });
 
-        it('should support object parameters', function () {
+        it('should support generic object parameters', function () {
             $callback = function (TestClassA $a) {};
             $actual = $this->subject->argumentsForCallback($callback);
 

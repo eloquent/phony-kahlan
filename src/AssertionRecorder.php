@@ -46,7 +46,7 @@ class AssertionRecorder implements PhonyAssertionRecorder
      *
      * @return EventCollection The result.
      */
-    public function createSuccess(array $events = [])
+    public function createSuccess(array $events = []): EventCollection
     {
         $suiteClass = $this->suiteClass;
         $suiteClass::current()->assert($this->successConfig);
@@ -61,8 +61,9 @@ class AssertionRecorder implements PhonyAssertionRecorder
      *
      * @return EventCollection The result.
      */
-    public function createSuccessFromEventCollection(EventCollection $events)
-    {
+    public function createSuccessFromEventCollection(
+        EventCollection $events
+    ): EventCollection {
         $suiteClass = $this->suiteClass;
         $suiteClass::current()->assert($this->successConfig);
 
@@ -76,7 +77,7 @@ class AssertionRecorder implements PhonyAssertionRecorder
      *
      * @throws Exception If this recorder throws exceptions.
      */
-    public function createFailure($description)
+    public function createFailure(string $description)
     {
         $exception = new AssertionException($description);
 

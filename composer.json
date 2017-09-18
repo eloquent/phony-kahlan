@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=7",
-        "eloquent/phony": "^1",
+        "eloquent/phony": "dev-php72",
         "kahlan/kahlan": "4.0.x-dev"
     },
     "require-dev": {
@@ -30,7 +30,10 @@
     "autoload-dev": {
         "psr-4": {
             "Eloquent\\Phony\\Kahlan\\": "test/src"
-        }
+        },
+        "files": [
+            "test/src/object.php"
+        ]
     },
     "config": {
         "platform": {

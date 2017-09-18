@@ -297,7 +297,7 @@ describe('Phony functions', function () {
                 expect($matcher)->toBeAnInstanceOf(WildcardMatcher::class);
                 expect($matcher->matcher())->toBeAnInstanceOf(AnyMatcher::class);
                 expect($matcher->minimumArguments())->toBe(0);
-                expect($matcher->maximumArguments())->toBe(null);
+                expect($matcher->maximumArguments())->toBe(-1);
             });
         });
     });

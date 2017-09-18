@@ -122,6 +122,8 @@ Parameter type | Supplied value
 `float`        | `.0`
 `string`       | `''`
 `array`        | `[]`
+`iterable`     | `[]`
+`object`       | `(object) []`
 `stdClass`     | `(object) []`
 `callable`     | [`stub()`]
 `Closure`      | `function () {}`

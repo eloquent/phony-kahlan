@@ -2,6 +2,7 @@
 
 namespace Eloquent\Phony\Kahlan;
 
+use ReflectionException;
 use ReflectionFunction;
 
 /**
@@ -9,6 +10,17 @@ use ReflectionFunction;
  */
 class ArgumentFactory
 {
+    public function __construct()
+    {
+        try {
+            $function = new ReflectionFunction(function (object $a) {});
+            $parameters = $function->getParameters();
+            $this->isObjectTypeSupported = null === $parameters[0]->getClass();
+        } catch (ReflectionException $e) {
+            $this->isObjectTypeSupported = false;
+        }
+    }
+
     /**
      * Returns an argument list of test doubles for the supplied callback.
      *
@@ -53,7 +65,19 @@ class ArgumentFactory
                     break;
 
                 case 'array':
+                case 'iterable':
                     $argument = [];
+
+                    break;
+
+                case 'object':
+                    if ($this->isObjectTypeSupported) {
+                        $argument = (object) [];
+
+                        break;
+                    }
+
+                    $argument = Phony::mock('object')->get();
 
                     break;
 
@@ -87,4 +111,6 @@ class ArgumentFactory
 
         return $arguments;
     }
+
+    private $isObjectTypeSupported;
 }
