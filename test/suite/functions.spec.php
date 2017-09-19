@@ -16,6 +16,7 @@ use Eloquent\Phony\Mock\Handle\StaticHandle;
 use Eloquent\Phony\Mock\Mock;
 use Eloquent\Phony\Spy\SpyVerifier;
 use Eloquent\Phony\Stub\StubVerifier;
+use ReflectionFunction;
 
 describe('Phony functions', function () {
     afterEach(function () {
@@ -299,6 +300,18 @@ describe('Phony functions', function () {
                 expect($matcher->minimumArguments())->toBe(0);
                 expect($matcher->maximumArguments())->toBe(-1);
             });
+        });
+    });
+
+    context('emptyValue()', function () {
+        it('should return an appropriate "empty" value for the supplied type', function () {
+            $typeA = (new ReflectionFunction(function (): bool {}))->getReturnType();
+            $typeB = (new ReflectionFunction(function (): int {}))->getReturnType();
+            $typeC = (new ReflectionFunction(function (): string {}))->getReturnType();
+
+            expect(emptyValue($typeA))->toBe(false);
+            expect(emptyValue($typeB))->toBe(0);
+            expect(emptyValue($typeC))->toBe('');
         });
     });
 

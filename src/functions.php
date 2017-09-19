@@ -18,6 +18,7 @@ use Eloquent\Phony\Stub\StubVerifier;
 use Exception;
 use InvalidArgumentException;
 use ReflectionClass;
+use ReflectionType;
 
 /**
  * Install Phony for Kahlan.
@@ -286,6 +287,18 @@ function wildcard(
 ): WildcardMatcher {
     return FacadeDriver::instance()->matcherFactory
         ->wildcard($value, $minimumArguments, $maximumArguments);
+}
+
+/**
+ * Get an "empty" value for the supplied type.
+ *
+ * @param ReflectionType $type The type.
+ *
+ * @return mixed An "empty" value of the supplied type.
+ */
+function emptyValue(ReflectionType $type)
+{
+    return FacadeDriver::instance()->emptyValueFactory->fromType($type);
 }
 
 /**

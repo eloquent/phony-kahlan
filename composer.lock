@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/eloquent/phony.git",
-                "reference": "7c1503269617041a4ba52121aa5546633bd7547c"
+                "reference": "9e67af099b5664a8ac68ce8ff1a9affefd9b2104"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eloquent/phony/zipball/7c1503269617041a4ba52121aa5546633bd7547c",
-                "reference": "7c1503269617041a4ba52121aa5546633bd7547c",
+                "url": "https://api.github.com/repos/eloquent/phony/zipball/9e67af099b5664a8ac68ce8ff1a9affefd9b2104",
+                "reference": "9e67af099b5664a8ac68ce8ff1a9affefd9b2104",
                 "shasum": ""
             },
             "require": {
@@ -63,7 +63,7 @@
                 "stubbing",
                 "test"
             ],
-            "time": "2017-09-18T11:25:40+00:00"
+            "time": "2017-09-19T00:41:46+00:00"
         },
         {
             "name": "kahlan/kahlan",
