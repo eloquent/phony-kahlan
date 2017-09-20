@@ -9,8 +9,6 @@ use Kahlan\Suite;
 
 describe('FacadeDriver', function () {
     beforeEach(function () {
-        skipIf(defined('HHVM_VERSION')); // not sure why HHVM breaks
-
         $this->filters = onStatic(mock(Filters::class))->full();
         $this->filters->apply->returns('filter-a');
 
