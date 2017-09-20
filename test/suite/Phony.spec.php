@@ -10,6 +10,7 @@ use Eloquent\Phony\Kahlan\Test\TestClassB;
 use Eloquent\Phony\Kahlan\Test\TestEvent;
 use Eloquent\Phony\Matcher\AnyMatcher;
 use Eloquent\Phony\Matcher\EqualToMatcher;
+use Eloquent\Phony\Matcher\InstanceOfMatcher;
 use Eloquent\Phony\Matcher\WildcardMatcher;
 use Eloquent\Phony\Mock\Builder\MockBuilder;
 use Eloquent\Phony\Mock\Handle\InstanceHandle;
@@ -278,6 +279,15 @@ describe('Phony facade', function () {
 
                 expect($matcher)->toBeAnInstanceOf(EqualToMatcher::class);
                 expect($matcher->value())->toBe('a');
+            });
+        });
+
+        context('anInstanceOf()', function () {
+            it('should return an "instance of" matcher', function () {
+                $matcher = Phony::anInstanceOf(TestClassA::class);
+
+                expect($matcher)->toBeAnInstanceOf(InstanceOfMatcher::class);
+                expect($matcher->type())->toBe(TestClassA::class);
             });
         });
 
