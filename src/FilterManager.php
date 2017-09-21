@@ -25,8 +25,7 @@ class FilterManager
             return;
         }
 
-        $filtersClass = $this->filtersClass;
-        $this->filterId = $filtersClass::apply(
+        $this->filterId = $this->filtersClass::apply(
             Suite::class,
             'runBlock',
             $this->filterFactory->createFilter()
@@ -39,8 +38,7 @@ class FilterManager
             return;
         }
 
-        $filtersClass = $this->filtersClass;
-        $filtersClass::detach($this->filterId);
+        $this->filtersClass::detach($this->filterId);
         $this->filterId = null;
     }
 

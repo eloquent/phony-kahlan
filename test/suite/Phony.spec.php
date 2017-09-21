@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Eloquent\Phony\Kahlan;
 
 use Countable;
@@ -25,7 +27,7 @@ describe('Phony facade', function () {
         Phony::restoreGlobalFunctions();
     });
 
-    context('install()', function () {
+    describe('install()', function () {
         it('should not fail catastrophically', function () {
             expect(function () {
                 Phony::install();
@@ -48,7 +50,7 @@ describe('Phony facade', function () {
         });
     });
 
-    context('uninstall()', function () {
+    describe('uninstall()', function () {
         it('should not fail catastrophically', function () {
             expect(function () {
                 Phony::install();
@@ -71,7 +73,7 @@ describe('Phony facade', function () {
         });
     });
 
-    context('mockBuilder()', function () {
+    describe('mockBuilder()', function () {
         it('should produce a working mock builder', function () {
             $builder = Phony::mockBuilder(TestClassA::class);
             $mock = $builder->get();
@@ -90,7 +92,7 @@ describe('Phony facade', function () {
         });
     });
 
-    context('partialMock()', function () {
+    describe('partialMock()', function () {
         it('should produce a working partial mock', function () {
             $handle = Phony::partialMock([TestClassB::class, Countable::class], ['a', 'b']);
             $mock = $handle->get();
@@ -122,7 +124,7 @@ describe('Phony facade', function () {
         });
     });
 
-    context('mock()', function () {
+    describe('mock()', function () {
         it('should produce a working mock', function () {
             $handle = Phony::mock([TestClassB::class, Countable::class]);
             $mock = $handle->get();
@@ -142,7 +144,7 @@ describe('Phony facade', function () {
         });
     });
 
-    context('onStatic()', function () {
+    describe('onStatic()', function () {
         it('should retrieve the static handle for a mock class', function () {
             $class = Phony::mockBuilder()->build();
             $handle = Phony::onStatic($class);
@@ -152,7 +154,7 @@ describe('Phony facade', function () {
         });
     });
 
-    context('on()', function () {
+    describe('on()', function () {
         it('should retrieve the handle for a mock instance', function () {
             $mock = Phony::mockBuilder()->get();
             $handle = Phony::on($mock);
@@ -162,7 +164,7 @@ describe('Phony facade', function () {
         });
     });
 
-    context('spy()', function () {
+    describe('spy()', function () {
         it('should produce a working spy', function () {
             $spy = Phony::spy(function () {
                 return implode(func_get_args());
@@ -174,7 +176,7 @@ describe('Phony facade', function () {
         });
     });
 
-    context('spyGlobal()', function () {
+    describe('spyGlobal()', function () {
         it('should produce a working global spy', function () {
             $spy = Phony::spyGlobal('sprintf', TestNamespace::class);
 
@@ -184,7 +186,7 @@ describe('Phony facade', function () {
         });
     });
 
-    context('stub()', function () {
+    describe('stub()', function () {
         it('should produce a working stub', function () {
             $stub = Phony::stub(function () {
                 return implode(func_get_args());
@@ -196,7 +198,7 @@ describe('Phony facade', function () {
         });
     });
 
-    context('spyGlobal()', function () {
+    describe('spyGlobal()', function () {
         it('should produce a working global stub', function () {
             $stub = Phony::stubGlobal('sprintf', TestNamespace::class)->returns('x');
 
@@ -206,7 +208,7 @@ describe('Phony facade', function () {
         });
     });
 
-    context('restoreGlobalFunctions()', function () {
+    describe('restoreGlobalFunctions()', function () {
         it('should restore global functions that have been stubbed', function () {
             Phony::stubGlobal('sprintf', TestNamespace::class);
             Phony::stubGlobal('vsprintf', TestNamespace::class);
@@ -221,13 +223,13 @@ describe('Phony facade', function () {
         });
     });
 
-    context('event order verification', function () {
+    describe('event order verification', function () {
         beforeEach(function () {
             $this->eventA = new TestEvent(0, 0.0);
             $this->eventB = new TestEvent(1, 1.0);
         });
 
-        context('checkInOrder()', function () {
+        describe('checkInOrder()', function () {
             it('should return truthy when the events are in order', function () {
                 expect(Phony::checkInOrder($this->eventA, $this->eventB))->toBeTruthy();
             });
@@ -237,7 +239,7 @@ describe('Phony facade', function () {
             });
         });
 
-        context('inOrder()', function () {
+        describe('inOrder()', function () {
             it('should return a verification result when the events are in order', function () {
                 $result = Phony::inOrder($this->eventA, $this->eventB);
 
@@ -246,7 +248,7 @@ describe('Phony facade', function () {
             });
         });
 
-        context('checkAnyOrder()', function () {
+        describe('checkAnyOrder()', function () {
             it('should return truthy when events are supplied', function () {
                 expect(Phony::checkAnyOrder($this->eventA, $this->eventB))->toBeTruthy();
             });
@@ -256,7 +258,7 @@ describe('Phony facade', function () {
             });
         });
 
-        context('anyOrder()', function () {
+        describe('anyOrder()', function () {
             it('should return a verification result when events are supplied', function () {
                 $result = Phony::anyOrder($this->eventA, $this->eventB);
 
@@ -266,14 +268,14 @@ describe('Phony facade', function () {
         });
     });
 
-    context('matchers', function () {
-        context('any()', function () {
+    describe('matchers', function () {
+        describe('any()', function () {
             it('should return an "any" matcher', function () {
                 expect(Phony::any())->toBeAnInstanceOf(AnyMatcher::class);
             });
         });
 
-        context('equalTo()', function () {
+        describe('equalTo()', function () {
             it('should return an "equal to" matcher', function () {
                 $matcher = Phony::equalTo('a');
 
@@ -282,7 +284,7 @@ describe('Phony facade', function () {
             });
         });
 
-        context('anInstanceOf()', function () {
+        describe('anInstanceOf()', function () {
             it('should return an "instance of" matcher', function () {
                 $matcher = Phony::anInstanceOf(TestClassA::class);
 
@@ -291,7 +293,7 @@ describe('Phony facade', function () {
             });
         });
 
-        context('wildcard()', function () {
+        describe('wildcard()', function () {
             it('should return a "wildcard" matcher', function () {
                 $matcher = Phony::wildcard('a', 1, 2);
                 $innerMatcher = $matcher->matcher();
@@ -314,7 +316,7 @@ describe('Phony facade', function () {
         });
     });
 
-    context('emptyValue()', function () {
+    describe('emptyValue()', function () {
         it('should return an appropriate "empty" value for the supplied type', function () {
             $typeA = (new ReflectionFunction(function (): bool {}))->getReturnType();
             $typeB = (new ReflectionFunction(function (): int {}))->getReturnType();
@@ -326,14 +328,14 @@ describe('Phony facade', function () {
         });
     });
 
-    context('setExportDepth()', function () {
+    describe('setExportDepth()', function () {
         it('should allow the export depth to be set', function () {
             expect(Phony::setExportDepth(111))->toBe(1);
             expect(Phony::setExportDepth(1))->toBe(111);
         });
     });
 
-    context('setUseColor()', function () {
+    describe('setUseColor()', function () {
         it('should allow the color usage flag to be set', function () {
             expect(Phony::setUseColor(false))->toBe(null);
             expect(Phony::setUseColor(true))->toBe(null);

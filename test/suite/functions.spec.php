@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Eloquent\Phony\Kahlan;
 
 use Countable;
 use Eloquent\Phony\Event\EventSequence;
+use Eloquent\Phony\Kahlan\Facade as TestNamespace;
 use Eloquent\Phony\Kahlan\Test\TestClassA;
 use Eloquent\Phony\Kahlan\Test\TestClassB;
 use Eloquent\Phony\Kahlan\Test\TestEvent;
@@ -24,7 +27,7 @@ describe('Phony functions', function () {
         restoreGlobalFunctions();
     });
 
-    context('install()', function () {
+    describe('install()', function () {
         it('should not fail catastrophically', function () {
             expect(function () {
                 install();
@@ -47,7 +50,7 @@ describe('Phony functions', function () {
         });
     });
 
-    context('uninstall()', function () {
+    describe('uninstall()', function () {
         it('should not fail catastrophically', function () {
             expect(function () {
                 install();
@@ -70,7 +73,7 @@ describe('Phony functions', function () {
         });
     });
 
-    context('mockBuilder()', function () {
+    describe('mockBuilder()', function () {
         it('should produce a working mock builder', function () {
             $builder = mockBuilder(TestClassA::class);
             $mock = $builder->get();
@@ -89,7 +92,7 @@ describe('Phony functions', function () {
         });
     });
 
-    context('partialMock()', function () {
+    describe('partialMock()', function () {
         it('should produce a working partial mock', function () {
             $handle = partialMock([TestClassB::class, Countable::class], ['a', 'b']);
             $mock = $handle->get();
@@ -121,7 +124,7 @@ describe('Phony functions', function () {
         });
     });
 
-    context('mock()', function () {
+    describe('mock()', function () {
         it('should produce a working mock', function () {
             $handle = mock([TestClassB::class, Countable::class]);
             $mock = $handle->get();
@@ -141,7 +144,7 @@ describe('Phony functions', function () {
         });
     });
 
-    context('onStatic()', function () {
+    describe('onStatic()', function () {
         it('should retrieve the static handle for a mock class', function () {
             $class = mockBuilder()->build();
             $handle = onStatic($class);
@@ -151,7 +154,7 @@ describe('Phony functions', function () {
         });
     });
 
-    context('on()', function () {
+    describe('on()', function () {
         it('should retrieve the handle for a mock instance', function () {
             $mock = mockBuilder()->get();
             $handle = on($mock);
@@ -161,7 +164,7 @@ describe('Phony functions', function () {
         });
     });
 
-    context('spy()', function () {
+    describe('spy()', function () {
         it('should produce a working spy', function () {
             $spy = spy(function () {
                 return implode(func_get_args());
@@ -173,17 +176,17 @@ describe('Phony functions', function () {
         });
     });
 
-    context('spyGlobal()', function () {
+    describe('spyGlobal()', function () {
         it('should produce a working global spy', function () {
-            $spy = spyGlobal('sprintf', 'Eloquent\Phony\Facade');
+            $spy = spyGlobal('sprintf', TestNamespace::class);
 
             expect($spy)->toBeAnInstanceOf(SpyVerifier::class);
-            expect(\Eloquent\Phony\Facade\sprintf('%s, %s', 'a', 'b'))->toBe('a, b');
+            expect(TestNamespace\sprintf('%s, %s', 'a', 'b'))->toBe('a, b');
             expect($spy->calledWith('%s, %s', 'a', 'b'))->toBeTruthy();
         });
     });
 
-    context('stub()', function () {
+    describe('stub()', function () {
         it('should produce a working stub', function () {
             $stub = stub(function () {
                 return implode(func_get_args());
@@ -195,38 +198,38 @@ describe('Phony functions', function () {
         });
     });
 
-    context('spyGlobal()', function () {
+    describe('spyGlobal()', function () {
         it('should produce a working global stub', function () {
-            $stub = stubGlobal('sprintf', 'Eloquent\Phony\Facade')->returns('x');
+            $stub = stubGlobal('sprintf', TestNamespace::class)->returns('x');
 
             expect($stub)->toBeAnInstanceOf(StubVerifier::class);
-            expect(\Eloquent\Phony\Facade\sprintf('%s, %s', 'a', 'b'))->toBe('x');
+            expect(TestNamespace\sprintf('%s, %s', 'a', 'b'))->toBe('x');
             expect($stub->calledWith('%s, %s', 'a', 'b'))->toBeTruthy();
         });
     });
 
-    context('restoreGlobalFunctions()', function () {
+    describe('restoreGlobalFunctions()', function () {
         it('should restore global functions that have been stubbed', function () {
-            stubGlobal('sprintf', 'Eloquent\Phony\Facade');
-            stubGlobal('vsprintf', 'Eloquent\Phony\Facade');
+            stubGlobal('sprintf', TestNamespace::class);
+            stubGlobal('vsprintf', TestNamespace::class);
 
-            expect(\Eloquent\Phony\Facade\sprintf('%s, %s', 'a', 'b'))->toBe(null);
-            expect(\Eloquent\Phony\Facade\vsprintf('%s, %s', ['a', 'b']))->toBe(null);
+            expect(TestNamespace\sprintf('%s, %s', 'a', 'b'))->toBe(null);
+            expect(TestNamespace\vsprintf('%s, %s', ['a', 'b']))->toBe(null);
 
             restoreGlobalFunctions();
 
-            expect(\Eloquent\Phony\Facade\sprintf('%s, %s', 'a', 'b'))->toBe('a, b');
-            expect(\Eloquent\Phony\Facade\vsprintf('%s, %s', ['a', 'b']))->toBe('a, b');
+            expect(TestNamespace\sprintf('%s, %s', 'a', 'b'))->toBe('a, b');
+            expect(TestNamespace\vsprintf('%s, %s', ['a', 'b']))->toBe('a, b');
         });
     });
 
-    context('event order verification', function () {
+    describe('event order verification', function () {
         beforeEach(function () {
             $this->eventA = new TestEvent(0, 0.0);
             $this->eventB = new TestEvent(1, 1.0);
         });
 
-        context('checkInOrder()', function () {
+        describe('checkInOrder()', function () {
             it('should return truthy when the events are in order', function () {
                 expect(checkInOrder($this->eventA, $this->eventB))->toBeTruthy();
             });
@@ -236,7 +239,7 @@ describe('Phony functions', function () {
             });
         });
 
-        context('inOrder()', function () {
+        describe('inOrder()', function () {
             it('should return a verification result when the events are in order', function () {
                 $result = inOrder($this->eventA, $this->eventB);
 
@@ -245,7 +248,7 @@ describe('Phony functions', function () {
             });
         });
 
-        context('checkAnyOrder()', function () {
+        describe('checkAnyOrder()', function () {
             it('should return truthy when events are supplied', function () {
                 expect(checkAnyOrder($this->eventA, $this->eventB))->toBeTruthy();
             });
@@ -255,7 +258,7 @@ describe('Phony functions', function () {
             });
         });
 
-        context('anyOrder()', function () {
+        describe('anyOrder()', function () {
             it('should return a verification result when events are supplied', function () {
                 $result = anyOrder($this->eventA, $this->eventB);
 
@@ -265,14 +268,14 @@ describe('Phony functions', function () {
         });
     });
 
-    context('matchers', function () {
-        context('any()', function () {
+    describe('matchers', function () {
+        describe('any()', function () {
             it('should return an "any" matcher', function () {
                 expect(any())->toBeAnInstanceOf(AnyMatcher::class);
             });
         });
 
-        context('equalTo()', function () {
+        describe('equalTo()', function () {
             it('should return an "equal to" matcher', function () {
                 $matcher = equalTo('a');
 
@@ -281,7 +284,7 @@ describe('Phony functions', function () {
             });
         });
 
-        context('anInstanceOf()', function () {
+        describe('anInstanceOf()', function () {
             it('should return an "instance of" matcher', function () {
                 $matcher = anInstanceOf(TestClassA::class);
 
@@ -290,7 +293,7 @@ describe('Phony functions', function () {
             });
         });
 
-        context('wildcard()', function () {
+        describe('wildcard()', function () {
             it('should return a "wildcard" matcher', function () {
                 $matcher = wildcard('a', 1, 2);
                 $innerMatcher = $matcher->matcher();
@@ -313,7 +316,7 @@ describe('Phony functions', function () {
         });
     });
 
-    context('emptyValue()', function () {
+    describe('emptyValue()', function () {
         it('should return an appropriate "empty" value for the supplied type', function () {
             $typeA = (new ReflectionFunction(function (): bool {}))->getReturnType();
             $typeB = (new ReflectionFunction(function (): int {}))->getReturnType();
@@ -325,14 +328,14 @@ describe('Phony functions', function () {
         });
     });
 
-    context('setExportDepth()', function () {
+    describe('setExportDepth()', function () {
         it('should allow the export depth to be set', function () {
             expect(setExportDepth(111))->toBe(1);
             expect(setExportDepth(1))->toBe(111);
         });
     });
 
-    context('setUseColor()', function () {
+    describe('setUseColor()', function () {
         it('should allow the color usage flag to be set', function () {
             expect(setUseColor(false))->toBe(null);
             expect(setUseColor(true))->toBe(null);

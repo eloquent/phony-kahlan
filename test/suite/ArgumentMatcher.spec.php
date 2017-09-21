@@ -1,25 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Eloquent\Phony\Kahlan;
 
-use Eloquent\Phony\Exporter\InlineExporter;
-use Eloquent\Phony\Invocation\InvocableInspector;
-use Eloquent\Phony\Sequencer\Sequencer;
 use Kahlan\Arg;
 
 describe('ArgumentMatcher', function () {
-    beforeEach(function () {
-        $this->sequence = Sequencer::sequence(md5(mt_rand()));
-        $this->invocableInspector = InvocableInspector::instance();
-        $this->exporter = new InlineExporter(1, $this->sequence, $this->invocableInspector);
-    });
-
     context('with a regular matcher', function () {
         beforeEach(function () {
             $this->subject = new ArgumentMatcher(Arg::toBe('value'));
         });
 
-        context('matches()', function () {
+        describe('matches()', function () {
             it('should return true for matching values', function () {
                 expect($this->subject->matches('value'))->toBe(true);
             });
@@ -29,13 +22,13 @@ describe('ArgumentMatcher', function () {
             });
         });
 
-        context('describe()', function () {
+        describe('describe()', function () {
             it('should describe the underlying matcher', function () {
                 expect($this->subject->describe())->toBe('<toBe("value")>');
             });
         });
 
-        context('string representation', function () {
+        describe('string representation', function () {
             it('should describe the underlying matcher', function () {
                 expect(strval($this->subject))->toBe('<toBe("value")>');
             });
@@ -47,7 +40,7 @@ describe('ArgumentMatcher', function () {
             $this->subject = new ArgumentMatcher(Arg::notToBe('value'));
         });
 
-        context('matches()', function () {
+        describe('matches()', function () {
             it('should return true for mismatched values', function () {
                 expect($this->subject->matches('other'))->toBe(true);
             });
@@ -57,13 +50,13 @@ describe('ArgumentMatcher', function () {
             });
         });
 
-        context('describe()', function () {
+        describe('describe()', function () {
             it('should describe the underlying matcher', function () {
                 expect($this->subject->describe())->toBe('<notToBe("value")>');
             });
         });
 
-        context('string representation', function () {
+        describe('string representation', function () {
             it('should describe the underlying matcher', function () {
                 expect(strval($this->subject))->toBe('<notToBe("value")>');
             });

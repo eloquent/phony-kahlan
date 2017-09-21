@@ -16,7 +16,7 @@ class Phony
     /**
      * Install Phony for Kahlan.
      */
-    public function install()
+    public static function install()
     {
         Globals::$container->filterManager->install();
     }
@@ -24,7 +24,7 @@ class Phony
     /**
      * Uninstall Phony for Kahlan.
      */
-    public function uninstall()
+    public static function uninstall()
     {
         Globals::$container->filterManager->uninstall();
     }

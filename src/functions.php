@@ -277,7 +277,7 @@ function equalTo($value): Matcher
  */
 function anInstanceOf($type): Matcher
 {
-    return FacadeDriver::instance()->matcherFactory->anInstanceOf($type);
+    return Globals::$container->matcherFactory->anInstanceOf($type);
 }
 
 /**
@@ -309,7 +309,7 @@ function wildcard(
  */
 function emptyValue(ReflectionType $type)
 {
-    return FacadeDriver::instance()->emptyValueFactory->fromType($type);
+    return Globals::$container->emptyValueFactory->fromType($type);
 }
 
 /**

@@ -6,12 +6,18 @@ namespace Eloquent\Phony\Kahlan;
 
 use Eloquent\Phony\Matcher\Matchable;
 use Eloquent\Phony\Matcher\MatcherDriver;
+use Kahlan\Arg;
 
 /**
  * A matcher driver for Kahlan argument matchers.
  */
 class ArgumentMatcherDriver implements MatcherDriver
 {
+    public function __construct(callable $classExists)
+    {
+        $this->classExists = $classExists;
+    }
+
     /**
      * Returns true if this matcher driver's classes or interfaces exist.
      *
@@ -19,7 +25,7 @@ class ArgumentMatcherDriver implements MatcherDriver
      */
     public function isAvailable(): bool
     {
-        return class_exists('Kahlan\Arg');
+        return ($this->classExists)(Arg::class);
     }
 
     /**
@@ -29,7 +35,7 @@ class ArgumentMatcherDriver implements MatcherDriver
      */
     public function matcherClassNames(): array
     {
-        return ['Kahlan\Arg'];
+        return [Arg::class];
     }
 
     /**
@@ -43,4 +49,6 @@ class ArgumentMatcherDriver implements MatcherDriver
     {
         return new ArgumentMatcher($matcher);
     }
+
+    private $classExists;
 }

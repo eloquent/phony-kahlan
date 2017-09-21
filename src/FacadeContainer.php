@@ -17,7 +17,8 @@ class FacadeContainer
     public function __construct()
     {
         $this->initializeContainer(new AssertionRecorder());
-        $this->matcherFactory->addMatcherDriver(new ArgumentMatcherDriver());
+        $this->matcherFactory
+            ->addMatcherDriver(new ArgumentMatcherDriver('class_exists'));
 
         $this->filterManager = new FilterManager(
             new FilterFactory(new ArgumentFactory()),

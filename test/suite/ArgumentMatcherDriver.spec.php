@@ -1,48 +1,39 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Eloquent\Phony\Kahlan;
 
-use Eloquent\Phony\Exporter\InlineExporter;
-use Eloquent\Phony\Invocation\InvocableInspector;
-use Eloquent\Phony\Sequencer\Sequencer;
 use Kahlan\Arg;
-use function Eloquent\Phony\restoreGlobalFunctions;
-use function Eloquent\Phony\stubGlobal;
+use function Eloquent\Phony\stub;
 
 describe('ArgumentMatcherDriver', function () {
     beforeEach(function () {
-        $this->sequence = Sequencer::sequence(md5(mt_rand()));
-        $this->invocableInspector = InvocableInspector::instance();
-        $this->exporter = new InlineExporter(1, $this->sequence, $this->invocableInspector);
-
-        $this->subject = new ArgumentMatcherDriver();
+        $this->classExists = stub();
+        $this->subject = new ArgumentMatcherDriver($this->classExists);
     });
 
-    afterEach(function () {
-        restoreGlobalFunctions();
-    });
-
-    context('isAvailable()', function () {
+    describe('isAvailable()', function () {
         it('should return true if Kahlan\Arg exists', function () {
-            $classExists = stubGlobal('class_exists', __NAMESPACE__)->with('Kahlan\Arg')->returns(true);
+            $this->classExists->with(Arg::class)->returns(true);
 
             expect($this->subject->isAvailable())->toBe(true);
         });
 
         it('should return false if Kahlan\Arg does not exist', function () {
-            $classExists = stubGlobal('class_exists', __NAMESPACE__)->with('Kahlan\Arg')->returns(false);
+            $this->classExists->with(Arg::class)->returns(false);
 
             expect($this->subject->isAvailable())->toBe(false);
         });
     });
 
-    context('matcherClassNames()', function () {
+    describe('matcherClassNames()', function () {
         it('should return only Kahlan\Arg', function () {
-            expect($this->subject->matcherClassNames())->toBe(['Kahlan\Arg']);
+            expect($this->subject->matcherClassNames())->toBe([Arg::class]);
         });
     });
 
-    context('wrapMatcher()', function () {
+    describe('wrapMatcher()', function () {
         it('should wrap the supplied matcher', function () {
             expect($this->subject->wrapMatcher(Arg::toBe('a')))->toBeAnInstanceOf(ArgumentMatcher::class);
         });

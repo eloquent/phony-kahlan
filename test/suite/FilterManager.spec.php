@@ -1,29 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Eloquent\Phony\Kahlan;
 
-use Closure;
-use Kahlan\Arg;
 use Kahlan\Filter\Filters;
 use Kahlan\Suite;
 
-describe('FacadeDriver', function () {
+describe('FilterManager', function () {
     beforeEach(function () {
+        $this->filterFactory = mock(FilterFactory::class);
         $this->filters = onStatic(mock(Filters::class))->full();
         $this->filters->apply->returns('filter-a');
+        $this->subject = new FilterManager($this->filterFactory->get(), $this->filters->className());
 
-        $this->subject = new FacadeDriver($this->filters->className());
+        $this->filter = function () {};
+        $this->filterFactory->createFilter->returns($this->filter);
     });
 
-    context('install()', function () {
+    describe('install()', function () {
         beforeEach(function () {
             $this->subject->install();
         });
 
         afterEach(function () {
-            if (isset($this->subject)) {
-                $this->subject->uninstall();
-            }
+            $this->subject->uninstall();
         });
 
         it('should do nothing when already installed', function () {
@@ -33,29 +34,12 @@ describe('FacadeDriver', function () {
             expect($this->filters->apply->callCount())->toBe($expected);
         });
 
-        it('should apply the execution filter', function () {
-            $this->filters->apply->calledWith(Suite::class, 'runBlock', Arg::toBeAnInstanceOf(Closure::class));
-        });
-
-        context('execution filter', function () {
-            beforeEach(function () {
-                $this->filterClosure = $this->filters->apply->calledWith(Suite::class, 'runBlock', '*')
-                    ->firstCall()->argument(2);
-            });
-
-            it('should execute the closure with arguments that match the parameters', function () {
-                $calls = [];
-                $closure = function (string $a, int $b) use (&$calls) {
-                    $calls[] = func_get_args();
-                };
-                $this->filterClosure(null, null, $closure);
-
-                expect($calls)->toBe([['', 0]]);
-            });
+        it('should apply the filter', function () {
+            $this->filters->apply->calledWith(Suite::class, 'runBlock', $this->filter);
         });
     });
 
-    context('uninstall()', function () {
+    describe('uninstall()', function () {
         it('should do nothing when not installed', function () {
             $expected = $this->filters->detach->callCount();
             $this->subject->uninstall();
@@ -66,10 +50,15 @@ describe('FacadeDriver', function () {
         context('when previously installed', function () {
             beforeEach(function () {
                 $this->subject->install();
+            });
+
+            afterEach(function () {
                 $this->subject->uninstall();
             });
 
             it('should detach the execution filter', function () {
+                $this->subject->uninstall();
+
                 $this->filters->detach->calledWith('filter-a');
             });
         });

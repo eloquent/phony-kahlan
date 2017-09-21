@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Eloquent\Phony\Kahlan;
 
 use Closure;
@@ -25,7 +27,7 @@ describe('AssertionRecorder', function () {
         $this->eventB = new TestEvent(1, 1.0);
     });
 
-    context('createSuccess()', function () {
+    describe('createSuccess()', function () {
         beforeEach(function () {
             $this->result = $this->subject->createSuccess([$this->eventA, $this->eventB]);
         });
@@ -41,7 +43,7 @@ describe('AssertionRecorder', function () {
             expect($config['handler'])->toBeAnInstanceOf(Closure::class);
         });
 
-        context('assert handler', function () {
+        describe('assert handler', function () {
             beforeEach(function () {
                 $config = $this->scope->assert->calledWith(Arg::toBeAn('array'))->firstCall()->argument();
                 $this->handler = $config['handler'];
@@ -53,7 +55,7 @@ describe('AssertionRecorder', function () {
         });
     });
 
-    context('createSuccessFromEventCollection()', function () {
+    describe('createSuccessFromEventCollection()', function () {
         beforeEach(function () {
             $this->result = $this->subject->createSuccessFromEventCollection(
                 new EventSequence([$this->eventA, $this->eventB], $this->callVerifierFactory)
@@ -71,7 +73,7 @@ describe('AssertionRecorder', function () {
             expect($config['handler'])->toBeAnInstanceOf(Closure::class);
         });
 
-        context('assert handler', function () {
+        describe('assert handler', function () {
             beforeEach(function () {
                 $config = $this->scope->assert->calledWith(Arg::toBeAn('array'))->firstCall()->argument();
                 $this->handler = $config['handler'];
@@ -83,7 +85,7 @@ describe('AssertionRecorder', function () {
         });
     });
 
-    context('createFailure()', function () {
+    describe('createFailure()', function () {
         beforeEach(function () {
             $this->result = $this->subject->createFailure('You done goofed.');
         });
@@ -95,7 +97,7 @@ describe('AssertionRecorder', function () {
             expect($config['handler'])->toBeAnInstanceOf(Closure::class);
         });
 
-        context('assert handler', function () {
+        describe('assert handler', function () {
             beforeEach(function () {
                 $config = $this->scope->assert->calledWith(Arg::toBeAn('array'))->firstCall()->argument();
                 $this->handler = $config['handler'];

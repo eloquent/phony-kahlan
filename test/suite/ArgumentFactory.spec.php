@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Eloquent\Phony\Kahlan;
 
 describe('ArgumentFactory', function () {
@@ -7,8 +9,8 @@ describe('ArgumentFactory', function () {
         $this->subject = new ArgumentFactory();
     });
 
-    context('argumentsForCallback()', function () {
-        it('should should return arguments for each parameter', function () {
+    describe('argumentsForCallback()', function () {
+        it('should return arguments for each parameter', function () {
             $callback = function (bool $a, int $b, string $c, $d) {};
 
             expect($this->subject->argumentsForCallback($callback))->toBe([false, 0, '', null]);

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Eloquent\Phony\Kahlan;
 
-use Closure;
-use Kahlan\Block;
-
 /**
  * Creates the Kahlan filter used to perform test dependency injection.
  */
@@ -21,7 +18,7 @@ class FilterFactory
     {
         $argumentFactory = $this->argumentFactory;
 
-        return function (callable $next, Block $block, Closure $closure) use (
+        return function ($next, $block, callable $closure) use (
             $argumentFactory
         ) {
             return $closure(
