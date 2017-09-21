@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Eloquent\Phony\Kahlan;
 
 use Eloquent\Phony\Call\Arguments;
@@ -25,7 +27,7 @@ use ReflectionType;
  */
 function install()
 {
-    return FacadeDriver::instance()->install();
+    return Globals::$container->filterManager->install();
 }
 
 /**
@@ -33,7 +35,7 @@ function install()
  */
 function uninstall()
 {
-    return FacadeDriver::instance()->uninstall();
+    return Globals::$container->filterManager->uninstall();
 }
 
 /**
@@ -49,7 +51,7 @@ function uninstall()
  */
 function mockBuilder($types = []): MockBuilder
 {
-    return FacadeDriver::instance()->mockBuilderFactory->create($types);
+    return Globals::$container->mockBuilderFactory->create($types);
 }
 
 /**
@@ -65,10 +67,10 @@ function mockBuilder($types = []): MockBuilder
  */
 function mock($types = []): InstanceHandle
 {
-    $driver = FacadeDriver::instance();
+    $container = Globals::$container;
 
-    return $driver->handleFactory->instanceHandle(
-        $driver->mockBuilderFactory->create($types)->full()
+    return $container->handleFactory->instanceHandle(
+        $container->mockBuilderFactory->create($types)->full()
     );
 }
 
@@ -90,10 +92,10 @@ function mock($types = []): InstanceHandle
  */
 function partialMock($types = [], $arguments = []): InstanceHandle
 {
-    $driver = FacadeDriver::instance();
+    $container = Globals::$container;
 
-    return $driver->handleFactory->instanceHandle(
-        $driver->mockBuilderFactory->create($types)->partialWith($arguments)
+    return $container->handleFactory->instanceHandle(
+        $container->mockBuilderFactory->create($types)->partialWith($arguments)
     );
 }
 
@@ -107,7 +109,7 @@ function partialMock($types = [], $arguments = []): InstanceHandle
  */
 function on($mock): InstanceHandle
 {
-    return FacadeDriver::instance()->handleFactory->instanceHandle($mock);
+    return Globals::$container->handleFactory->instanceHandle($mock);
 }
 
 /**
@@ -120,7 +122,7 @@ function on($mock): InstanceHandle
  */
 function onStatic($class): StaticHandle
 {
-    return FacadeDriver::instance()->handleFactory->staticHandle($class);
+    return Globals::$container->handleFactory->staticHandle($class);
 }
 
 /**
@@ -132,7 +134,7 @@ function onStatic($class): StaticHandle
  */
 function spy(callable $callback = null): SpyVerifier
 {
-    return FacadeDriver::instance()->spyVerifierFactory
+    return Globals::$container->spyVerifierFactory
         ->createFromCallback($callback);
 }
 
@@ -147,7 +149,7 @@ function spy(callable $callback = null): SpyVerifier
  */
 function spyGlobal(string $function, string $namespace): SpyVerifier
 {
-    return FacadeDriver::instance()->spyVerifierFactory
+    return Globals::$container->spyVerifierFactory
         ->createGlobal($function, $namespace);
 }
 
@@ -160,7 +162,7 @@ function spyGlobal(string $function, string $namespace): SpyVerifier
  */
 function stub(callable $callback = null): StubVerifier
 {
-    return FacadeDriver::instance()->stubVerifierFactory
+    return Globals::$container->stubVerifierFactory
         ->createFromCallback($callback);
 }
 
@@ -178,7 +180,7 @@ function stub(callable $callback = null): StubVerifier
  */
 function stubGlobal(string $function, string $namespace): StubVerifier
 {
-    return FacadeDriver::instance()->stubVerifierFactory
+    return Globals::$container->stubVerifierFactory
         ->createGlobal($function, $namespace);
 }
 
@@ -188,8 +190,7 @@ function stubGlobal(string $function, string $namespace): StubVerifier
  */
 function restoreGlobalFunctions()
 {
-    return FacadeDriver::instance()->functionHookManager
-        ->restoreGlobalFunctions();
+    return Globals::$container->functionHookManager->restoreGlobalFunctions();
 }
 
 /**
@@ -201,8 +202,7 @@ function restoreGlobalFunctions()
  */
 function checkInOrder(...$events)
 {
-    return FacadeDriver::instance()->eventOrderVerifier
-        ->checkInOrder(...$events);
+    return Globals::$container->eventOrderVerifier->checkInOrder(...$events);
 }
 
 /**
@@ -216,7 +216,7 @@ function checkInOrder(...$events)
  */
 function inOrder(...$events): EventCollection
 {
-    return FacadeDriver::instance()->eventOrderVerifier->inOrder(...$events);
+    return Globals::$container->eventOrderVerifier->inOrder(...$events);
 }
 
 /**
@@ -229,8 +229,7 @@ function inOrder(...$events): EventCollection
  */
 function checkAnyOrder(...$events)
 {
-    return FacadeDriver::instance()->eventOrderVerifier
-        ->checkAnyOrder(...$events);
+    return Globals::$container->eventOrderVerifier->checkAnyOrder(...$events);
 }
 
 /**
@@ -244,7 +243,7 @@ function checkAnyOrder(...$events)
  */
 function anyOrder(...$events): EventCollection
 {
-    return FacadeDriver::instance()->eventOrderVerifier->anyOrder(...$events);
+    return Globals::$container->eventOrderVerifier->anyOrder(...$events);
 }
 
 /**
@@ -254,7 +253,7 @@ function anyOrder(...$events): EventCollection
  */
 function any(): Matcher
 {
-    return FacadeDriver::instance()->matcherFactory->any();
+    return Globals::$container->matcherFactory->any();
 }
 
 /**
@@ -266,7 +265,7 @@ function any(): Matcher
  */
 function equalTo($value): Matcher
 {
-    return FacadeDriver::instance()->matcherFactory->equalTo($value, false);
+    return Globals::$container->matcherFactory->equalTo($value, false);
 }
 
 /**
@@ -297,7 +296,7 @@ function wildcard(
     int $minimumArguments = 0,
     int $maximumArguments = -1
 ): WildcardMatcher {
-    return FacadeDriver::instance()->matcherFactory
+    return Globals::$container->matcherFactory
         ->wildcard($value, $minimumArguments, $maximumArguments);
 }
 
@@ -324,7 +323,7 @@ function emptyValue(ReflectionType $type)
  */
 function setExportDepth(int $depth): int
 {
-    return FacadeDriver::instance()->exporter->setDepth($depth);
+    return Globals::$container->exporter->setDepth($depth);
 }
 
 /**
@@ -336,8 +335,8 @@ function setExportDepth(int $depth): int
  */
 function setUseColor(bool $useColor = null)
 {
-    $facade = FacadeDriver::instance();
+    $container = Globals::$container;
 
-    $facade->assertionRenderer->setUseColor($useColor);
-    $facade->differenceEngine->setUseColor($useColor);
+    $container->assertionRenderer->setUseColor($useColor);
+    $container->differenceEngine->setUseColor($useColor);
 }

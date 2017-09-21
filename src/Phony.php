@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Eloquent\Phony\Kahlan;
 
 use Eloquent\Phony\Facade\FacadeTrait;
@@ -14,23 +16,18 @@ class Phony
     /**
      * Install Phony for Kahlan.
      */
-    public static function install()
+    public function install()
     {
-        return static::driver()->install();
+        Globals::$container->filterManager->install();
     }
 
     /**
      * Uninstall Phony for Kahlan.
      */
-    public static function uninstall()
+    public function uninstall()
     {
-        return static::driver()->uninstall();
+        Globals::$container->filterManager->uninstall();
     }
 
-    private static function driver()
-    {
-        return self::$driver ?? self::$driver = FacadeDriver::instance();
-    }
-
-    private static $driver;
+    private static $globals = Globals::class;
 }
