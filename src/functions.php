@@ -190,7 +190,7 @@ function stubGlobal(string $function, string $namespace): StubVerifier
  */
 function restoreGlobalFunctions()
 {
-    return Globals::$container->functionHookManager->restoreGlobalFunctions();
+    Globals::$container->functionHookManager->restoreGlobalFunctions();
 }
 
 /**
