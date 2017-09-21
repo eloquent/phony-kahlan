@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Eloquent\Phony\Kahlan\Test;
 
 class TestClassB extends TestClassA implements TestInterfaceB
