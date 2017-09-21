@@ -1,3 +1,7 @@
+checks:
+    php:
+        duplication: false # duplications are for performance optimizations
+
 filter:
     paths:
         - "src/"

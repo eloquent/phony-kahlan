@@ -27,7 +27,7 @@ use ReflectionType;
  */
 function install()
 {
-    return Globals::$container->filterManager->install();
+    Globals::$container->filterManager->install();
 }
 
 /**
@@ -35,7 +35,7 @@ function install()
  */
 function uninstall()
 {
-    return Globals::$container->filterManager->uninstall();
+    Globals::$container->filterManager->uninstall();
 }
 
 /**
