@@ -1,5 +1,9 @@
 # Phony for Kahlan changelog
 
+## 1.0.0 (2017-10-05)
+
+- **[IMPROVED]** Updated to use the `4.x` stable version of Kahlan.
+
 ## 0.3.0 (2017-09-29)
 
 This release uses *Phony* `2.x` under the hood. Check out the

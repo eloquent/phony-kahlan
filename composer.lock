@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c77b3422c61156491f6b0f969af01b25",
+    "content-hash": "f5b9ffece789d4568267591a1b195719",
     "packages": [
         {
             "name": "eloquent/phony",
@@ -69,16 +69,16 @@
         },
         {
             "name": "kahlan/kahlan",
-            "version": "4.0.x-dev",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kahlan/kahlan.git",
-                "reference": "6d27486a70c02f2c1e9428bddf8233fe4d41843e"
+                "reference": "1edbcb3443a2bdb4b1df30b57f4a69a1c27c575f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/6d27486a70c02f2c1e9428bddf8233fe4d41843e",
-                "reference": "6d27486a70c02f2c1e9428bddf8233fe4d41843e",
+                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/1edbcb3443a2bdb4b1df30b57f4a69a1c27c575f",
+                "reference": "1edbcb3443a2bdb4b1df30b57f4a69a1c27c575f",
                 "shasum": ""
             },
             "require": {
@@ -119,7 +119,7 @@
                 "testing",
                 "unit test"
             ],
-            "time": "2017-08-13T00:46:32+00:00"
+            "time": "2017-10-04T22:54:01+00:00"
         }
     ],
     "packages-dev": [
@@ -357,16 +357,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.6.0",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "5642a36a60c11cdd01488d192541a89bb44a4abf"
+                "reference": "ab2e189d94698178988f9732bc75bb4ce8d16f77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/5642a36a60c11cdd01488d192541a89bb44a4abf",
-                "reference": "5642a36a60c11cdd01488d192541a89bb44a4abf",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/ab2e189d94698178988f9732bc75bb4ce8d16f77",
+                "reference": "ab2e189d94698178988f9732bc75bb4ce8d16f77",
                 "shasum": ""
             },
             "require": {
@@ -375,8 +375,8 @@
                 "ext-json": "*",
                 "ext-tokenizer": "*",
                 "gecko-packages/gecko-php-unit": "^2.0",
-                "php": "^5.6 || >=7.0 <7.2",
-                "sebastian/diff": "^1.4",
+                "php": "^5.6 || >=7.0 <7.3",
+                "php-cs-fixer/diff": "^1.0",
                 "symfony/console": "^3.2",
                 "symfony/event-dispatcher": "^3.0",
                 "symfony/filesystem": "^3.0",
@@ -406,11 +406,6 @@
                 "php-cs-fixer"
             ],
             "type": "application",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.6-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "PhpCsFixer\\": "src/"
@@ -438,7 +433,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2017-09-11T15:23:20+00:00"
+            "time": "2017-10-02T12:16:05+00:00"
         },
         {
             "name": "gecko-packages/gecko-php-unit",
@@ -533,6 +528,53 @@
             "time": "2017-09-27T21:40:39+00:00"
         },
         {
+            "name": "php-cs-fixer/diff",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-CS-Fixer/diff.git",
+                "reference": "d068edadcb8f7bc2ea3d3769cdbaf609026ec4f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/diff/zipball/d068edadcb8f7bc2ea3d3769cdbaf609026ec4f4",
+                "reference": "d068edadcb8f7bc2ea3d3769cdbaf609026ec4f4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35 || ^5.4.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kore Nordmann",
+                    "email": "mail@kore-nordmann.de"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ],
+            "description": "sebastian/diff v2 backport support for PHP5.6",
+            "homepage": "https://github.com/PHP-CS-Fixer",
+            "keywords": [
+                "diff"
+            ],
+            "time": "2017-09-23T16:02:08+00:00"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.2",
             "source": {
@@ -578,58 +620,6 @@
                 "psr-3"
             ],
             "time": "2016-10-10T12:19:37+00:00"
-        },
-        {
-            "name": "sebastian/diff",
-            "version": "1.4.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "7f066a26a962dbe58ddea9f72a4e82874a3975a4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/7f066a26a962dbe58ddea9f72a4e82874a3975a4",
-                "reference": "7f066a26a962dbe58ddea9f72a4e82874a3975a4",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.3 || ^7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kore Nordmann",
-                    "email": "mail@kore-nordmann.de"
-                },
-                {
-                    "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de"
-                }
-            ],
-            "description": "Diff implementation",
-            "homepage": "https://github.com/sebastianbergmann/diff",
-            "keywords": [
-                "diff"
-            ],
-            "time": "2017-05-22T07:24:03+00:00"
         },
         {
             "name": "symfony/console",
@@ -1244,9 +1234,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "kahlan/kahlan": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
