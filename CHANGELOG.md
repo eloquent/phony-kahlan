@@ -1,5 +1,12 @@
 # Phony for Kahlan changelog
 
+## 1.0.1 (2017-10-17)
+
+- **[FIXED]** Updated Kahlan configuration examples to work with Kahlan lazy
+  autoloading ([#1]).
+
+[#1]: https://github.com/eloquent/phony-kahlan/issues/1
+
 ## 1.0.0 (2017-10-05)
 
 - **[IMPROVED]** Updated to use the `4.x` stable version of Kahlan.
