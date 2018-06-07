@@ -12,8 +12,8 @@
         }
     ],
     "require": {
-        "php": ">=7",
-        "eloquent/phony": "^2",
+        "php": ">=7.1",
+        "eloquent/phony": "^3",
         "kahlan/kahlan": "^4"
     },
     "require-dev": {
@@ -39,7 +39,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.0.99999"
+            "php": "7.1.99999"
         }
     }
 }

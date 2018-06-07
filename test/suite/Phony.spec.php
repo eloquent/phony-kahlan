@@ -150,7 +150,7 @@ describe('Phony facade', function () {
             $handle = Phony::onStatic($class);
 
             expect($handle)->toBeAnInstanceOf(StaticHandle::class);
-            expect($handle->clazz())->toBe($class);
+            expect($handle->class())->toBe($class);
         });
     });
 
