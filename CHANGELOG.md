@@ -1,5 +1,15 @@
 # Phony for Kahlan changelog
 
+## 2.0.0 (2018-06-08)
+
+This release uses *Phony* `3.x` under the hood. Check out the
+[migration guide][migration-3] for *Phony* `3.x`, which also applies to this
+release.
+
+- **[BC BREAK]** PHP 7.0 is no longer supported.
+
+[migration-3]: https://github.com/eloquent/phony/blob/master/MIGRATING.md#migrating-from-2x-to-3x
+
 ## 1.0.1 (2017-10-17)
 
 - **[FIXED]** Updated Kahlan configuration examples to work with Kahlan lazy

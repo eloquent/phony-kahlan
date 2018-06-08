@@ -14,7 +14,7 @@ class FilterFactory
         $this->argumentFactory = $argumentFactory;
     }
 
-    public function createFilter()
+    public function createFilter(): callable
     {
         $argumentFactory = $this->argumentFactory;
 

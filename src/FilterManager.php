@@ -19,7 +19,7 @@ class FilterManager
         $this->filtersClass = $filtersClass;
     }
 
-    public function install()
+    public function install(): void
     {
         if (null !== $this->filterId) {
             return;
@@ -32,7 +32,7 @@ class FilterManager
         );
     }
 
-    public function uninstall()
+    public function uninstall(): void
     {
         if (null === $this->filterId) {
             return;

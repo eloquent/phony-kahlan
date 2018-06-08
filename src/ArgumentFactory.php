@@ -18,7 +18,7 @@ class ArgumentFactory
      *
      * @return array The arguments.
      */
-    public function argumentsForCallback(callable $callback)
+    public function argumentsForCallback(callable $callback): array
     {
         $definition = new ReflectionFunction($callback);
         $arguments = [];

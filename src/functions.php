@@ -21,11 +21,12 @@ use Exception;
 use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionType;
+use Throwable;
 
 /**
  * Install Phony for Kahlan.
  */
-function install()
+function install(): void
 {
     Globals::$container->filterManager->install();
 }
@@ -33,7 +34,7 @@ function install()
 /**
  * Uninstall Phony for Kahlan.
  */
-function uninstall()
+function uninstall(): void
 {
     Globals::$container->filterManager->uninstall();
 }
@@ -188,7 +189,7 @@ function stubGlobal(string $function, string $namespace): StubVerifier
  * Restores the behavior of any functions in the global namespace that have been
  * altered via spyGlobal() or stubGlobal().
  */
-function restoreGlobalFunctions()
+function restoreGlobalFunctions(): void
 {
     Globals::$container->functionHookManager->restoreGlobalFunctions();
 }
@@ -198,9 +199,10 @@ function restoreGlobalFunctions()
  *
  * @param Event|EventCollection ...$events The events.
  *
- * @return EventCollection|null The result.
+ * @return EventCollection|null     The result.
+ * @throws InvalidArgumentException If invalid input is supplied.
  */
-function checkInOrder(...$events)
+function checkInOrder(...$events): ?EventCollection
 {
     return Globals::$container->eventOrderVerifier->checkInOrder(...$events);
 }
@@ -211,8 +213,9 @@ function checkInOrder(...$events)
  *
  * @param Event|EventCollection ...$events The events.
  *
- * @return EventCollection The result.
- * @throws Throwable       If the assertion fails, and the assertion recorder throws exceptions.
+ * @return EventCollection          The result.
+ * @throws InvalidArgumentException If invalid input is supplied.
+ * @throws Throwable                If the assertion fails.
  */
 function inOrder(...$events): EventCollection
 {
@@ -227,7 +230,7 @@ function inOrder(...$events): EventCollection
  * @return EventCollection|null     The result.
  * @throws InvalidArgumentException If invalid input is supplied.
  */
-function checkAnyOrder(...$events)
+function checkAnyOrder(...$events): ?EventCollection
 {
     return Globals::$container->eventOrderVerifier->checkAnyOrder(...$events);
 }
@@ -239,7 +242,7 @@ function checkAnyOrder(...$events)
  *
  * @return EventCollection          The result.
  * @throws InvalidArgumentException If invalid input is supplied.
- * @throws Throwable                If the assertion fails, and the assertion recorder throws exceptions.
+ * @throws Throwable                If the assertion fails.
  */
 function anyOrder(...$events): EventCollection
 {
@@ -333,7 +336,7 @@ function setExportDepth(int $depth): int
  *
  * @param bool|null $useColor True to use color.
  */
-function setUseColor(bool $useColor = null)
+function setUseColor(?bool $useColor)
 {
     $container = Globals::$container;
 
