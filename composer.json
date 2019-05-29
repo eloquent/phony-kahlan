@@ -36,10 +36,5 @@
         "files": [
             "test/src/object.php"
         ]
-    },
-    "config": {
-        "platform": {
-            "php": "7.1.99999"
-        }
     }
 }
