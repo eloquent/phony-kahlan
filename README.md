@@ -1,31 +1,23 @@
 # Phony for Kahlan
 
 [![Current version image][version-image]][current version]
-[![Current build status image][build-image]][current build status]
-[![Current Windows build status image][windows-build-image]][current windows build status]
-[![Current coverage status image][coverage-image]][current coverage status]
 
-[build-image]: https://img.shields.io/travis/eloquent/phony-kahlan/master.svg?style=flat-square "Current build status for the master branch"
-[coverage-image]: https://img.shields.io/codecov/c/github/eloquent/phony-kahlan/master.svg?style=flat-square "Current test coverage for the master branch"
-[current build status]: https://travis-ci.org/eloquent/phony-kahlan
-[current coverage status]: https://codecov.io/github/eloquent/phony-kahlan
 [current version]: https://packagist.org/packages/eloquent/phony-kahlan
-[current windows build status]: https://ci.appveyor.com/project/eloquent/phony-kahlan
 [version-image]: https://img.shields.io/packagist/v/eloquent/phony-kahlan.svg?style=flat-square "This project uses semantic versioning"
-[windows-build-image]: https://img.shields.io/appveyor/ci/eloquent/phony-kahlan/master.svg?label=windows&style=flat-square "Current Windows build status for the master branch"
 
-## Installation and documentation
+## Installation
 
-- Available as [Composer] package [eloquent/phony-kahlan].
-- Read the [Phony documentation].
+    composer require --dev eloquent/phony-kahlan
+
+## See also
+
+- Read the [documentation].
 - Read the [Kahlan documentation].
 - Visit the [main Phony repository].
 
-[composer]: http://getcomposer.org/
-[eloquent/phony-kahlan]: https://packagist.org/packages/eloquent/phony-kahlan
+[documentation]: http://eloquent-software.com/phony/latest/
 [kahlan documentation]: https://kahlan.github.io/docs/
 [main phony repository]: https://github.com/eloquent/phony
-[phony documentation]: http://eloquent-software.com/phony/latest/
 
 ## What is *Phony for Kahlan*?
 

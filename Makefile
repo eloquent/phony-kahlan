@@ -1,37 +1,7 @@
-.PHONY: test
-test: install
-	php --version
-	vendor/bin/kahlan
+# Powered by https://makefiles.dev/
 
-.PHONY: coverage
-coverage: install
-	mkdir -p coverage
-	phpdbg --version
-	phpdbg -qrr vendor/bin/kahlan --coverage --istanbul=coverage/coverage.json
-	istanbul report
+-include .makefiles/Makefile
+-include .makefiles/pkg/php/v1/Makefile
 
-.PHONY: ci
-ci: install
-	mkdir -p coverage
-	phpdbg --version
-	phpdbg -qrr vendor/bin/kahlan --coverage --istanbul=coverage/coverage.json --lcov=coverage/coverage.lcov --clover=coverage/coverage.xml
-
-.PHONY: open-coverage
-open-coverage:
-	open coverage/lcov-report/index.html
-
-.PHONY: integration
-integration: install
-	test/integration/run
-
-.PHONY: lint
-lint: install
-	vendor/bin/php-cs-fixer fix
-
-.PHONY: install
-install:
-ifeq (${TRAVIS_PHP_VERSION},nightly)
-	composer install --ignore-platform-reqs
-else
-	composer install
-endif
+.makefiles/%:
+	@curl -sfL https://makefiles.dev/v1 | bash /dev/stdin "$@"

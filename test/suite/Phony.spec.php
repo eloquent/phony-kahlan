@@ -20,7 +20,9 @@ use Eloquent\Phony\Mock\Handle\StaticHandle;
 use Eloquent\Phony\Mock\Mock;
 use Eloquent\Phony\Spy\SpyVerifier;
 use Eloquent\Phony\Stub\StubVerifier;
+use Exception;
 use ReflectionFunction;
+use ReflectionType;
 
 describe('Phony facade', function () {
     afterEach(function () {
@@ -241,6 +243,7 @@ describe('Phony facade', function () {
 
         describe('inOrder()', function () {
             it('should return a verification result when the events are in order', function () {
+                /** @var EventSequence */
                 $result = Phony::inOrder($this->eventA, $this->eventB);
 
                 expect($result)->toBeAnInstanceOf(EventSequence::class);
@@ -260,6 +263,7 @@ describe('Phony facade', function () {
 
         describe('anyOrder()', function () {
             it('should return a verification result when events are supplied', function () {
+                /** @var EventSequence */
                 $result = Phony::anyOrder($this->eventA, $this->eventB);
 
                 expect($result)->toBeAnInstanceOf(EventSequence::class);
@@ -277,6 +281,7 @@ describe('Phony facade', function () {
 
         describe('equalTo()', function () {
             it('should return an "equal to" matcher', function () {
+                /** @var EqualToMatcher */
                 $matcher = Phony::equalTo('a');
 
                 expect($matcher)->toBeAnInstanceOf(EqualToMatcher::class);
@@ -286,6 +291,7 @@ describe('Phony facade', function () {
 
         describe('anInstanceOf()', function () {
             it('should return an "instance of" matcher', function () {
+                /** @var InstanceOfMatcher */
                 $matcher = Phony::anInstanceOf(TestClassA::class);
 
                 expect($matcher)->toBeAnInstanceOf(InstanceOfMatcher::class);
@@ -295,7 +301,9 @@ describe('Phony facade', function () {
 
         describe('wildcard()', function () {
             it('should return a "wildcard" matcher', function () {
+                /** @var WildcardMatcher */
                 $matcher = Phony::wildcard('a', 1, 2);
+                /** @var EqualToMatcher */
                 $innerMatcher = $matcher->matcher();
 
                 expect($matcher)->toBeAnInstanceOf(WildcardMatcher::class);
@@ -318,8 +326,11 @@ describe('Phony facade', function () {
 
     describe('emptyValue()', function () {
         it('should return an appropriate "empty" value for the supplied type', function () {
+            /** @var ReflectionType */
             $typeA = (new ReflectionFunction(function (): bool {}))->getReturnType();
+            /** @var ReflectionType */
             $typeB = (new ReflectionFunction(function (): int {}))->getReturnType();
+            /** @var ReflectionType */
             $typeC = (new ReflectionFunction(function (): string {}))->getReturnType();
 
             expect(Phony::emptyValue($typeA))->toBe(false);
@@ -337,8 +348,16 @@ describe('Phony facade', function () {
 
     describe('setUseColor()', function () {
         it('should allow the color usage flag to be set', function () {
-            expect(Phony::setUseColor(false))->toBe(null);
-            expect(Phony::setUseColor(true))->toBe(null);
+            $exception = null;
+
+            try {
+                Phony::setUseColor(false);
+                Phony::setUseColor(true);
+            } catch (Exception $e) {
+                $exception = $e;
+            }
+
+            expect($exception)->toBe(null);
         });
     });
 });

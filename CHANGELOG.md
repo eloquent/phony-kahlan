@@ -1,5 +1,9 @@
 # Phony for Kahlan changelog
 
+## Next release
+
+- **[BC BREAK]** PHP 7.1 is no longer supported.
+
 ## 2.0.0 (2018-06-08)
 
 This release uses *Phony* `3.x` under the hood. Check out the
