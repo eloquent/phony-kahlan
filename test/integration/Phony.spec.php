@@ -1,13 +1,17 @@
 <?php
 
+use function Eloquent\Phony\Kahlan\on;
 use Eloquent\Phony\Kahlan\Test\TestClassA;
 use Eloquent\Phony\Mock\Mock;
 use Eloquent\Phony\Stub\StubVerifier;
 use Kahlan\Arg;
-use function Eloquent\Phony\Kahlan\on;
 
 describe('Phony', function (DateTime $dateTime) {
     beforeEach(function (TestClassA $mock) {
+        if (!$mock instanceof Mock) {
+            throw new RuntimeException('Auto-injected mock is not a mock');
+        }
+
         $this->mock = $mock;
         $this->handle = on($mock);
     });

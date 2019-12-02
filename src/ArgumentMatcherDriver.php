@@ -41,7 +41,7 @@ class ArgumentMatcherDriver implements MatcherDriver
     /**
      * Wrap the supplied third party matcher.
      *
-     * @param object $matcher The matcher to wrap.
+     * @param Arg $matcher The matcher to wrap.
      *
      * @return Matchable The wrapped matcher.
      */

@@ -21,6 +21,7 @@ use Eloquent\Phony\Mock\Mock;
 use Eloquent\Phony\Spy\SpyVerifier;
 use Eloquent\Phony\Stub\StubVerifier;
 use ReflectionFunction;
+use ReflectionType;
 
 describe('Phony functions', function () {
     afterEach(function () {
@@ -277,6 +278,7 @@ describe('Phony functions', function () {
 
         describe('equalTo()', function () {
             it('should return an "equal to" matcher', function () {
+                /** @var EqualToMatcher */
                 $matcher = equalTo('a');
 
                 expect($matcher)->toBeAnInstanceOf(EqualToMatcher::class);
@@ -286,6 +288,7 @@ describe('Phony functions', function () {
 
         describe('anInstanceOf()', function () {
             it('should return an "instance of" matcher', function () {
+                /** @var InstanceOfMatcher */
                 $matcher = anInstanceOf(TestClassA::class);
 
                 expect($matcher)->toBeAnInstanceOf(InstanceOfMatcher::class);
@@ -295,7 +298,9 @@ describe('Phony functions', function () {
 
         describe('wildcard()', function () {
             it('should return a "wildcard" matcher', function () {
+                /** @var WildcardMatcher */
                 $matcher = wildcard('a', 1, 2);
+                /** @var EqualToMatcher */
                 $innerMatcher = $matcher->matcher();
 
                 expect($matcher)->toBeAnInstanceOf(WildcardMatcher::class);
@@ -318,8 +323,11 @@ describe('Phony functions', function () {
 
     describe('emptyValue()', function () {
         it('should return an appropriate "empty" value for the supplied type', function () {
+            /** @var ReflectionType */
             $typeA = (new ReflectionFunction(function (): bool {}))->getReturnType();
+            /** @var ReflectionType */
             $typeB = (new ReflectionFunction(function (): int {}))->getReturnType();
+            /** @var ReflectionType */
             $typeC = (new ReflectionFunction(function (): string {}))->getReturnType();
 
             expect(emptyValue($typeA))->toBe(false);

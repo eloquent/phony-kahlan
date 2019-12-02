@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Eloquent\Phony\Kahlan;
 
-use Kahlan\Arg;
 use function Eloquent\Phony\stub;
+use Kahlan\Arg;
 
 describe('ArgumentMatcherDriver', function () {
     beforeEach(function () {
