@@ -19,8 +19,10 @@ describe('AssertionRecorder', function () {
         $this->suite = onStatic(mock(Suite::class))->full();
         $this->suite->current->returns($this->scope->get());
         $this->callVerifierFactory = CallVerifierFactory::instance();
+        /** @var class-string */
+        $suiteClassName = $this->suite->className();
 
-        $this->subject = new AssertionRecorder($this->suite->className());
+        $this->subject = new AssertionRecorder($suiteClassName);
         $this->subject->setCallVerifierFactory($this->callVerifierFactory);
 
         $this->eventA = new TestEvent(0, 0.0);

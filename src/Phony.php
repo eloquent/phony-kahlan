@@ -29,5 +29,8 @@ class Phony
         Globals::$container->filterManager->uninstall();
     }
 
+    /**
+     * @var class-string
+     */
     private static $globals = Globals::class;
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Eloquent\Phony\Kahlan;
 
-use Eloquent\Phony\Matcher\Matchable;
+use Eloquent\Phony\Matcher\Matcher;
 use Eloquent\Phony\Matcher\MatcherDriver;
 use Kahlan\Arg;
 
@@ -43,12 +43,15 @@ class ArgumentMatcherDriver implements MatcherDriver
      *
      * @param Arg $matcher The matcher to wrap.
      *
-     * @return Matchable The wrapped matcher.
+     * @return Matcher The wrapped matcher.
      */
-    public function wrapMatcher($matcher): Matchable
+    public function wrapMatcher($matcher): Matcher
     {
         return new ArgumentMatcher($matcher);
     }
 
+    /**
+     * @var callable
+     */
     private $classExists;
 }

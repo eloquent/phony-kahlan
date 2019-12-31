@@ -19,6 +19,8 @@ class AssertionRecorder implements PhonyAssertionRecorder
 {
     /**
      * Construct a new assertion recorder.
+     *
+     * @param class-string $suiteClass
      */
     public function __construct(string $suiteClass = Suite::class)
     {
@@ -36,7 +38,7 @@ class AssertionRecorder implements PhonyAssertionRecorder
      */
     public function setCallVerifierFactory(
         CallVerifierFactory $callVerifierFactory
-    ) {
+    ): void {
         $this->callVerifierFactory = $callVerifierFactory;
     }
 
@@ -76,7 +78,8 @@ class AssertionRecorder implements PhonyAssertionRecorder
      *
      * @param string $description The failure description.
      *
-     * @throws AssertionException The assertion failure.
+     * @return null      If this recorder does not throw exceptions.
+     * @throws Throwable If this recorder throws exceptions.
      */
     public function createFailure(string $description)
     {
@@ -89,9 +92,22 @@ class AssertionRecorder implements PhonyAssertionRecorder
             },
             'type' => AssertionException::class,
         ]);
+
+        return null;
     }
 
+    /**
+     * @var class-string
+     */
     private $suiteClass;
+
+    /**
+     * @var array<string,mixed>
+     */
     private $successConfig;
+
+    /**
+     * @var CallVerifierFactory
+     */
     private $callVerifierFactory;
 }

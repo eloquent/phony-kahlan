@@ -57,5 +57,8 @@ class ArgumentMatcher implements Matcher
         return '<' . $this->matcher . '>';
     }
 
+    /**
+     * @var Arg
+     */
     private $matcher;
 }

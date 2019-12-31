@@ -11,6 +11,9 @@ use Kahlan\Suite;
  */
 class FilterManager
 {
+    /**
+     * @param class-string $filtersClass
+     */
     public function __construct(
         FilterFactory $filterFactory,
         string $filtersClass
@@ -42,7 +45,18 @@ class FilterManager
         $this->filterId = null;
     }
 
+    /**
+     * @var FilterFactory
+     */
     private $filterFactory;
+
+    /**
+     * @var class-string
+     */
     private $filtersClass;
+
+    /**
+     * @var ?string
+     */
     private $filterId;
 }

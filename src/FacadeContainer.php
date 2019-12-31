@@ -26,5 +26,8 @@ class FacadeContainer
         );
     }
 
+    /**
+     * @var FilterManager
+     */
     public $filterManager;
 }

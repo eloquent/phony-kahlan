@@ -12,7 +12,9 @@ describe('FilterManager', function () {
         $this->filterFactory = mock(FilterFactory::class);
         $this->filters = onStatic(mock(Filters::class))->full();
         $this->filters->apply->returns('filter-a');
-        $this->subject = new FilterManager($this->filterFactory->get(), $this->filters->className());
+        /** @var class-string */
+        $filtersClassName = $this->filters->className();
+        $this->subject = new FilterManager($this->filterFactory->get(), $filtersClassName);
 
         $this->filter = function () {};
         $this->filterFactory->createFilter->returns($this->filter);

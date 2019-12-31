@@ -20,6 +20,7 @@ use Eloquent\Phony\Mock\Handle\StaticHandle;
 use Eloquent\Phony\Mock\Mock;
 use Eloquent\Phony\Spy\SpyVerifier;
 use Eloquent\Phony\Stub\StubVerifier;
+use Exception;
 use ReflectionFunction;
 use ReflectionType;
 
@@ -135,7 +136,7 @@ describe('Phony functions', function () {
             expect($mock)->toBeAnInstanceOf(TestClassB::class);
             expect($mock)->toBeAnInstanceOf(Countable::class);
             expect($mock->constructorArguments)->toBe(null);
-            expect($mock->testClassAMethodA('a', 'b'))->toBe(null);
+            expect($mock->testClassAMethodA('a', 'b'))->toBe('');
         });
 
         it('should produce a generic mock with all arguments defaulted', function () {
@@ -324,11 +325,11 @@ describe('Phony functions', function () {
     describe('emptyValue()', function () {
         it('should return an appropriate "empty" value for the supplied type', function () {
             /** @var ReflectionType */
-            $typeA = (new ReflectionFunction(function (): bool {}))->getReturnType();
+            $typeA = (new ReflectionFunction(function (): bool { return false; }))->getReturnType();
             /** @var ReflectionType */
-            $typeB = (new ReflectionFunction(function (): int {}))->getReturnType();
+            $typeB = (new ReflectionFunction(function (): int { return 0; }))->getReturnType();
             /** @var ReflectionType */
-            $typeC = (new ReflectionFunction(function (): string {}))->getReturnType();
+            $typeC = (new ReflectionFunction(function (): string { return ''; }))->getReturnType();
 
             expect(emptyValue($typeA))->toBe(false);
             expect(emptyValue($typeB))->toBe(0);
@@ -345,8 +346,16 @@ describe('Phony functions', function () {
 
     describe('setUseColor()', function () {
         it('should allow the color usage flag to be set', function () {
-            expect(setUseColor(false))->toBe(null);
-            expect(setUseColor(true))->toBe(null);
+            $actual = null;
+
+            try {
+                setUseColor(false);
+                setUseColor(true);
+            } catch (Exception $error) {
+                $actual = $error;
+            }
+
+            expect($actual)->toBe(null);
         });
     });
 });

@@ -3,18 +3,24 @@ parameters:
   paths: [src, test]
   inferPrivatePropertyTypeFromConstructor: true
   ignoreErrors:
-    - /^Function afterEach not found.$/
-    - /^Function beforeEach not found.$/
-    - /^Function context not found.$/
-    - /^Function describe not found.$/
-    - /^Function expect not found.$/
-    - /^Function it not found.$/
-
-    # PHPStan doesn't seem to understand the callable type
-    - '/expects Closure|string, callable\(\): mixed given./'
-
     # allow @throws with interfaces
     - '/@throws with type .* is not subtype of Throwable/'
+
+    - message: /^Function afterEach not found.$/
+      path: test
+    - message: /^Function beforeEach not found.$/
+      path: test
+    - message: /^Function context not found.$/
+      path: test
+    - message: /^Function describe not found.$/
+      path: test
+    - message: /^Function expect not found.$/
+      path: test
+    - message: /^Function it not found.$/
+      path: test
+
+    # PHPStan doesn't seem to understand the callable type
+    # - '/expects Closure|string, callable\(\): mixed given./'
 
     # (tests only) Eloquent\Phony\Kahlan\Facade is a namespace alias, and not expected to exist
     - message: '/^(Class|Function) Eloquent\\Phony\\Kahlan\\Facade(\\\w+)? not found.$/'

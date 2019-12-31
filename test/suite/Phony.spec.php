@@ -136,7 +136,7 @@ describe('Phony facade', function () {
             expect($mock)->toBeAnInstanceOf(TestClassB::class);
             expect($mock)->toBeAnInstanceOf(Countable::class);
             expect($mock->constructorArguments)->toBe(null);
-            expect($mock->testClassAMethodA('a', 'b'))->toBe(null);
+            expect($mock->testClassAMethodA('a', 'b'))->toBe('');
         });
 
         it('should produce a generic mock with all arguments defaulted', function () {
@@ -327,11 +327,11 @@ describe('Phony facade', function () {
     describe('emptyValue()', function () {
         it('should return an appropriate "empty" value for the supplied type', function () {
             /** @var ReflectionType */
-            $typeA = (new ReflectionFunction(function (): bool {}))->getReturnType();
+            $typeA = (new ReflectionFunction(function (): bool { return false; }))->getReturnType();
             /** @var ReflectionType */
-            $typeB = (new ReflectionFunction(function (): int {}))->getReturnType();
+            $typeB = (new ReflectionFunction(function (): int { return 0; }))->getReturnType();
             /** @var ReflectionType */
-            $typeC = (new ReflectionFunction(function (): string {}))->getReturnType();
+            $typeC = (new ReflectionFunction(function (): string { return ''; }))->getReturnType();
 
             expect(Phony::emptyValue($typeA))->toBe(false);
             expect(Phony::emptyValue($typeB))->toBe(0);

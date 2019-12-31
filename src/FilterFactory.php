@@ -27,5 +27,8 @@ class FilterFactory
         };
     }
 
+    /**
+     * @var ArgumentFactory
+     */
     private $argumentFactory;
 }

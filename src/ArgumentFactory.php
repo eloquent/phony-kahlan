@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Eloquent\Phony\Kahlan;
 
+use Closure;
 use ReflectionFunction;
 
 /**
@@ -16,11 +17,14 @@ class ArgumentFactory
      *
      * @param callable $callback The callback.
      *
-     * @return array The arguments.
+     * @return array<int,mixed> The arguments.
      */
     public function argumentsForCallback(callable $callback): array
     {
-        $definition = new ReflectionFunction($callback);
+        /** @var Closure */
+        $callableCallback = $callback;
+
+        $definition = new ReflectionFunction($callableCallback);
         $arguments = [];
 
         foreach ($definition->getParameters() as $parameter) {
