@@ -27,7 +27,7 @@ parameters:
       path: test/suite
 
     # Kahlan uses $this
-    - '/^Using \$this outside a class\.$/'
+    - '/^Variable \$this might not be defined\.$/'
     - '/^Undefined variable: \$this$/'
 
     # Kahlan uses magic static methods
