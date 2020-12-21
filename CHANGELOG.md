@@ -1,5 +1,11 @@
 # Phony for Kahlan changelog
 
+## Next release
+
+This release uses *Phony* `5.x`. There no BC breaking API changes.
+
+- **[BC BREAK]** PHP 7.2 is no longer supported.
+
 ## 3.0.0 (2020-01-06)
 
 This release uses *Phony* `4.x`. There no BC breaking API changes aside from

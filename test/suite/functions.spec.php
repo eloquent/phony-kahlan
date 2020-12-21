@@ -215,8 +215,8 @@ describe('Phony functions', function () {
             stubGlobal('sprintf', TestNamespace::class);
             stubGlobal('vsprintf', TestNamespace::class);
 
-            expect(TestNamespace\sprintf('%s, %s', 'a', 'b'))->toBe(null);
-            expect(TestNamespace\vsprintf('%s, %s', ['a', 'b']))->toBe(null);
+            expect(TestNamespace\sprintf('%s, %s', 'a', 'b'))->toBeEmpty();
+            expect(TestNamespace\vsprintf('%s, %s', ['a', 'b']))->toBeEmpty();
 
             restoreGlobalFunctions();
 
